@@ -1,11 +1,11 @@
 import Hero from "./Hero";
-import AboutOwner from "./AboutOwner";
+import FeaturedProducts from "./FeaturedProducts";
+
 const Home = () => {
     return (
         <>
-
             <Hero />
-            <AboutOwner />
+            <FeaturedProducts />
         </>
     );
 };
