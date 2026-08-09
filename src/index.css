@@ -7,17 +7,43 @@ html {
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  background: #ffffff;
-  color: #0f172a;
   margin: 0;
-  padding: 0;
+  min-width: 320px;
+  background: #f6f5f1;
+  color: #0f172a;
+  font-family: Inter, sans-serif;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+html.dark body {
+  background: #070b14;
+  color: #f8fafc;
 }
 
 * {
   box-sizing: border-box;
 }
 
-button {
-  cursor: pointer;
+::selection {
+  background: rgba(249, 115, 22, 0.25);
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.7);
 }

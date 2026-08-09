@@ -2,7 +2,7 @@ import Hero from "./Hero";
 import FeaturedProducts from "./FeaturedProducts";
 import CTASection from "./CTASection";
 import LocationSection from "./LocationSection";
-import Footer from "../components/Footer";
+
 
 const Home = () => {
     return (
@@ -15,7 +15,7 @@ const Home = () => {
 
             <LocationSection />
 
-            <Footer />
+
         </>
     );
 };

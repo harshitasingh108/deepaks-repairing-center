@@ -2,7 +2,7 @@ import ContactHero from "../contact/ContactHero";
 import ContactMap from "../contact/ContactMap";
 import ContactForm from "../contact/ContactForm";
 import WhyChooseUs from "../contact/WhyChooseUs";
-import Footer from "../components/Footer";
+
 
 const Contact = () => {
     return (
@@ -11,7 +11,7 @@ const Contact = () => {
             <ContactMap />
             <ContactForm />
             <WhyChooseUs />
-            <Footer />
+
         </>
     );
 };

@@ -1,12 +1,15 @@
 import {
-    Wrench,
-    ShoppingBag,
-    Settings,
-    ShieldCheck,
-    CheckCircle2,
     ArrowRight,
+    CheckCircle2,
     Phone,
+    ShieldCheck,
+    ShoppingBag,
+    Sparkles,
+    Wrench,
+    Settings,
 } from "lucide-react";
+
+import { NavLink } from "react-router-dom";
 
 const services = [
     {
@@ -76,40 +79,177 @@ const services = [
 
 const Services = () => {
     return (
-        <main className="overflow-hidden bg-[#f6f5f1]">
+        <main
+            className="
+        overflow-hidden
+        bg-[#f6f5f1]
+        text-slate-900
+        transition-colors
+        duration-500
+        dark:bg-[#070B14]
+        dark:text-white
+      "
+        >
 
             {/* =====================================================
           HERO
       ===================================================== */}
 
-            <section className="relative px-5 py-20 sm:px-6 sm:py-24 lg:py-28">
+            <section className="relative px-5 pb-16 pt-20 sm:px-6 sm:pb-20 sm:pt-28 lg:px-8 lg:pb-24">
 
-                {/* Background Glow */}
+                {/* Glow */}
 
-                <div className="pointer-events-none absolute -left-40 top-0 h-80 w-80 rounded-full bg-orange-400/10 blur-[120px]" />
+                <div
+                    className="
+            pointer-events-none
+            absolute
+            -left-40
+            top-0
+            h-[420px]
+            w-[420px]
+            rounded-full
+            bg-orange-500/10
+            blur-[150px]
+          "
+                />
 
-                <div className="pointer-events-none absolute -right-40 top-32 h-80 w-80 rounded-full bg-orange-300/10 blur-[120px]" />
+                <div
+                    className="
+            pointer-events-none
+            absolute
+            right-[-180px]
+            top-20
+            h-[420px]
+            w-[420px]
+            rounded-full
+            bg-orange-400/10
+            blur-[150px]
+          "
+                />
 
                 <div className="relative mx-auto max-w-7xl">
 
-                    <div className="mx-auto max-w-4xl text-center">
+                    <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.55fr]">
 
-                        <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide text-orange-600 shadow-sm sm:px-5 sm:text-sm">
-                            <Wrench size={16} />
-                            Our Services
+                        {/* Heading */}
+
+                        <div>
+
+                            <div
+                                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-orange-300/40
+                  bg-orange-500/5
+                  px-4
+                  py-2
+                  text-[10px]
+                  font-black
+                  uppercase
+                  tracking-[0.18em]
+                  text-orange-500
+                  shadow-sm
+                  sm:text-xs
+                "
+                            >
+                                <Sparkles size={15} />
+
+                                Our Expertise
+                            </div>
+
+                            <h1
+                                className="
+                  mt-6
+                  max-w-4xl
+                  text-4xl
+                  font-black
+                  leading-[1.02]
+                  tracking-[-0.04em]
+                  text-slate-950
+                  sm:text-5xl
+                  md:text-6xl
+                  lg:text-7xl
+                  dark:text-white
+                "
+                            >
+                                We Don't Just Repair Tools.
+
+                                <span
+                                    className="
+                    block
+                    bg-gradient-to-r
+                    from-orange-400
+                    via-orange-500
+                    to-orange-600
+                    bg-clip-text
+                    text-transparent
+                  "
+                                >
+                                    We Keep Your Work Moving.
+                                </span>
+                            </h1>
+
                         </div>
 
-                        <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl">
-                            Professional
-                            <span className="text-orange-500"> Power Tool </span>
-                            Solutions
-                        </h1>
 
-                        <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                            From repairing your existing tools to helping you choose
-                            the right machine, we provide dependable solutions backed
-                            by years of experience.
-                        </p>
+                        {/* Description */}
+
+                        <div className="lg:pb-2">
+
+                            <p
+                                className="
+                  max-w-xl
+                  text-sm
+                  leading-7
+                  text-slate-600
+                  sm:text-base
+                  sm:leading-8
+                  dark:text-slate-400
+                "
+                            >
+                                From professional repairs and genuine spare parts to
+                                reliable power tools, we provide practical solutions
+                                for workshops, construction work and everyday
+                                requirements.
+                            </p>
+
+                            <div className="mt-6 flex items-center gap-3">
+
+                                <div
+                                    className="
+                    flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange-500
+                    text-white
+                    shadow-lg
+                    shadow-orange-500/20
+                  "
+                                >
+                                    <Wrench size={18} />
+                                </div>
+
+                                <div>
+
+                                    <p className="text-sm font-black text-slate-900 dark:text-white">
+                                        45+ Years Experience
+                                    </p>
+
+                                    <p className="text-xs text-slate-500 dark:text-slate-500">
+                                        Power tools & machine solutions
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -119,64 +259,109 @@ const Services = () => {
 
 
             {/* =====================================================
-          SERVICES
+          SERVICES SHOWCASE
       ===================================================== */}
 
-            <section className="px-5 pb-20 sm:px-6 sm:pb-28">
+            <section className="px-5 pb-20 sm:px-6 sm:pb-28 lg:px-8">
 
-                <div className="mx-auto max-w-7xl space-y-8 sm:space-y-10">
+                <div className="mx-auto max-w-7xl space-y-10">
 
                     {services.map((service, index) => {
 
                         const Icon = service.icon;
 
+                        const isFeatured = index === 0;
+
                         return (
                             <article
                                 key={service.number}
-                                className="
+                                className={`
                   group
+                  relative
                   overflow-hidden
-                  rounded-[28px]
+                  rounded-[30px]
                   border
-                  border-slate-200/80
-                  bg-white
-                  shadow-[0_15px_50px_rgba(15,23,42,0.08)]
                   transition-all
                   duration-500
+                  sm:rounded-[38px]
+
+                  ${isFeatured
+                                        ? `
+                        border-slate-200
+                        bg-white
+                        shadow-[0_25px_80px_rgba(15,23,42,0.10)]
+                        dark:border-white/10
+                        dark:bg-[#0d1524]
+                        dark:shadow-[0_30px_90px_rgba(0,0,0,0.35)]
+                      `
+                                        : `
+                        border-slate-200/80
+                        bg-white/80
+                        shadow-[0_15px_55px_rgba(15,23,42,0.07)]
+                        dark:border-white/10
+                        dark:bg-white/[0.035]
+                        dark:shadow-[0_25px_70px_rgba(0,0,0,0.22)]
+                      `
+                                    }
+
                   hover:-translate-y-1
-                  hover:shadow-[0_25px_70px_rgba(15,23,42,0.13)]
-                  sm:rounded-[36px]
-                "
+                `}
                             >
+
+                                {/* Orange top accent */}
+
+                                <div
+                                    className="
+                    absolute
+                    left-0
+                    right-0
+                    top-0
+                    h-[3px]
+                    bg-gradient-to-r
+                    from-orange-500
+                    via-orange-400
+                    to-transparent
+                    opacity-70
+                  "
+                                />
+
 
                                 <div
                                     className={`
                     grid
-                    lg:grid-cols-2
-                    ${index % 2 !== 0 ? "lg:[&>*:first-child]:order-2" : ""}
+                    lg:grid-cols-[1.15fr_0.85fr]
+                    ${index % 2 !== 0
+                                            ? "lg:[&>*:first-child]:order-2"
+                                            : ""
+                                        }
                   `}
                                 >
 
-                                    {/* ================= MEDIA ================= */}
+                                    {/* =================================================
+                      MEDIA
+                  ================================================= */}
 
                                     <div
                                         className="
                       relative
-                      min-h-[280px]
+                      min-h-[300px]
                       overflow-hidden
                       bg-slate-950
-                      sm:min-h-[400px]
-                      lg:min-h-[520px]
+                      sm:min-h-[430px]
+                      lg:min-h-[570px]
                     "
                                     >
 
+                                        {/* Video / Image */}
+
                                         {service.type === "video" ? (
+
                                             <video
                                                 autoPlay
                                                 muted
                                                 loop
                                                 playsInline
-                                                preload="auto"
+                                                preload="metadata"
                                                 className="
                           absolute
                           inset-0
@@ -184,8 +369,9 @@ const Services = () => {
                           w-full
                           object-cover
                           transition-transform
-                          duration-700
-                          group-hover:scale-105
+                          duration-[1200ms]
+                          ease-out
+                          group-hover:scale-[1.04]
                         "
                                             >
                                                 <source
@@ -193,7 +379,9 @@ const Services = () => {
                                                     type="video/mp4"
                                                 />
                                             </video>
+
                                         ) : (
+
                                             <img
                                                 src={service.media}
                                                 alt={service.title}
@@ -205,58 +393,246 @@ const Services = () => {
                           w-full
                           object-cover
                           transition-transform
-                          duration-700
-                          group-hover:scale-105
+                          duration-[1200ms]
+                          ease-out
+                          group-hover:scale-[1.04]
                         "
                                             />
+
                                         )}
 
-                                        {/* Overlay */}
 
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                                        {/* Cinematic overlay */}
+
+                                        <div
+                                            className="
+                        absolute
+                        inset-0
+                        bg-gradient-to-t
+                        from-black/80
+                        via-black/15
+                        to-black/5
+                      "
+                                        />
+
 
                                         {/* Number */}
 
-                                        <div className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-black/25 text-sm font-black text-white backdrop-blur-md sm:left-7 sm:top-7 sm:h-12 sm:w-12">
+                                        <div
+                                            className="
+                        absolute
+                        left-5
+                        top-5
+                        flex
+                        h-12
+                        w-12
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        border
+                        border-white/20
+                        bg-black/25
+                        text-sm
+                        font-black
+                        text-white
+                        shadow-lg
+                        backdrop-blur-xl
+                        sm:left-7
+                        sm:top-7
+                      "
+                                        >
                                             {service.number}
                                         </div>
 
-                                        {/* Label */}
 
-                                        <div className="absolute bottom-5 left-5 rounded-full border border-white/20 bg-black/25 px-4 py-2 text-[10px] font-bold tracking-[0.15em] text-white backdrop-blur-md sm:bottom-7 sm:left-7 sm:text-xs">
-                                            {service.label}
+                                        {/* Media label */}
+
+                                        <div
+                                            className="
+                        absolute
+                        bottom-5
+                        left-5
+                        right-5
+                        flex
+                        items-end
+                        justify-between
+                        gap-4
+                        sm:bottom-7
+                        sm:left-7
+                        sm:right-7
+                      "
+                                        >
+
+                                            <div>
+
+                                                <p
+                                                    className="
+                            text-[9px]
+                            font-black
+                            uppercase
+                            tracking-[0.2em]
+                            text-orange-300
+                            sm:text-[10px]
+                          "
+                                                >
+                                                    {service.label}
+                                                </p>
+
+                                                <h2
+                                                    className="
+                            mt-2
+                            text-2xl
+                            font-black
+                            tracking-tight
+                            text-white
+                            sm:text-3xl
+                          "
+                                                >
+                                                    {service.title}
+                                                </h2>
+
+                                            </div>
+
+
+                                            <div
+                                                className="
+                          hidden
+                          h-12
+                          w-12
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          border-white/20
+                          bg-white/10
+                          text-white
+                          backdrop-blur-xl
+                          sm:flex
+                        "
+                                            >
+                                                <ArrowRight
+                                                    size={19}
+                                                    className="
+                            transition-transform
+                            duration-300
+                            group-hover:translate-x-1
+                          "
+                                                />
+                                            </div>
+
                                         </div>
 
                                     </div>
 
 
-                                    {/* ================= CONTENT ================= */}
+                                    {/* =================================================
+                      CONTENT
+                  ================================================= */}
 
-                                    <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14 xl:p-16">
+                                    <div
+                                        className="
+                      flex
+                      flex-col
+                      justify-center
+                      p-7
+                      sm:p-10
+                      lg:p-12
+                      xl:p-16
+                    "
+                                    >
 
-                                        {/* Icon */}
+                                        {/* Icon + label */}
 
-                                        <div className="flex h-13 w-13 h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white">
-                                            <Icon size={25} />
+                                        <div className="flex items-center gap-4">
+
+                                            <div
+                                                className="
+                          flex
+                          h-14
+                          w-14
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-2xl
+                          bg-orange-500/10
+                          text-orange-500
+                          transition-all
+                          duration-300
+                          group-hover:bg-orange-500
+                          group-hover:text-white
+                          group-hover:shadow-lg
+                          group-hover:shadow-orange-500/20
+                        "
+                                            >
+                                                <Icon size={25} />
+                                            </div>
+
+                                            <div>
+
+                                                <p
+                                                    className="
+                            text-[10px]
+                            font-black
+                            uppercase
+                            tracking-[0.18em]
+                            text-orange-500
+                          "
+                                                >
+                                                    {service.label}
+                                                </p>
+
+                                                <p className="mt-1 text-xs font-medium text-slate-400">
+                                                    Deepak Repairing Center
+                                                </p>
+
+                                            </div>
+
                                         </div>
+
 
                                         {/* Heading */}
 
-                                        <h2 className="mt-6 text-2xl font-black leading-tight text-slate-900 sm:mt-7 sm:text-3xl lg:text-4xl">
+                                        <h3
+                                            className="
+                        mt-7
+                        text-3xl
+                        font-black
+                        leading-tight
+                        tracking-tight
+                        text-slate-950
+                        sm:text-4xl
+                        dark:text-white
+                      "
+                                        >
                                             {service.title}
-                                        </h2>
+                                        </h3>
+
 
                                         {/* Description */}
 
-                                        <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600 sm:mt-5 sm:text-base sm:leading-8 lg:text-lg">
+                                        <p
+                                            className="
+                        mt-5
+                        max-w-xl
+                        text-sm
+                        leading-7
+                        text-slate-600
+                        sm:text-base
+                        sm:leading-8
+                        dark:text-slate-400
+                      "
+                                        >
                                             {service.description}
                                         </p>
 
+
                                         {/* Points */}
 
-                                        <div className="mt-6 space-y-3 sm:mt-7">
+                                        <div className="mt-7 space-y-4">
 
                                             {service.points.map((point) => (
+
                                                 <div
                                                     key={point}
                                                     className="flex items-start gap-3"
@@ -264,48 +640,108 @@ const Services = () => {
 
                                                     <CheckCircle2
                                                         size={18}
-                                                        className="mt-0.5 shrink-0 text-orange-500"
+                                                        className="
+                              mt-0.5
+                              shrink-0
+                              text-orange-500
+                            "
                                                     />
 
-                                                    <span className="text-sm font-medium text-slate-700 sm:text-base">
+                                                    <span
+                                                        className="
+                              text-sm
+                              font-semibold
+                              text-slate-700
+                              sm:text-base
+                              dark:text-slate-300
+                            "
+                                                    >
                                                         {point}
                                                     </span>
 
                                                 </div>
+
                                             ))}
 
                                         </div>
 
+
                                         {/* CTA */}
 
-                                        <a
-                                            href="/contact"
-                                            className="
-                        mt-7
-                        inline-flex
-                        w-fit
-                        items-center
-                        gap-2
-                        rounded-xl
-                        bg-slate-900
-                        px-5
-                        py-3
-                        text-sm
-                        font-bold
-                        text-white
-                        transition-all
-                        duration-300
-                        hover:-translate-y-1
-                        hover:bg-orange-500
-                        hover:shadow-lg
-                        sm:mt-9
-                        sm:px-6
-                        sm:py-3.5
-                      "
-                                        >
-                                            Enquire About Service
-                                            <ArrowRight size={17} />
-                                        </a>
+                                        <div className="mt-9 flex flex-wrap gap-3">
+
+                                            <NavLink
+                                                to="/contact"
+                                                className="
+                          group/btn
+                          inline-flex
+                          items-center
+                          gap-2
+                          rounded-xl
+                          bg-slate-950
+                          px-5
+                          py-3.5
+                          text-sm
+                          font-black
+                          text-white
+                          shadow-lg
+                          transition-all
+                          duration-300
+                          hover:-translate-y-1
+                          hover:bg-orange-500
+                          hover:shadow-orange-500/20
+                          dark:bg-white
+                          dark:text-slate-950
+                          dark:hover:bg-orange-500
+                          dark:hover:text-white
+                        "
+                                            >
+                                                Enquire About Service
+
+                                                <ArrowRight
+                                                    size={17}
+                                                    className="
+                            transition-transform
+                            group-hover/btn:translate-x-1
+                          "
+                                                />
+
+                                            </NavLink>
+
+
+                                            <a
+                                                href="tel:+919871238460"
+                                                className="
+                          inline-flex
+                          items-center
+                          gap-2
+                          rounded-xl
+                          border
+                          border-slate-200
+                          px-5
+                          py-3.5
+                          text-sm
+                          font-bold
+                          text-slate-700
+                          transition-all
+                          duration-300
+                          hover:-translate-y-1
+                          hover:border-orange-400
+                          hover:text-orange-500
+                          dark:border-white/10
+                          dark:text-slate-300
+                          dark:hover:border-orange-500
+                          dark:hover:text-orange-400
+                        "
+                                            >
+
+                                                <Phone size={16} />
+
+                                                Call
+
+                                            </a>
+
+                                        </div>
 
                                     </div>
 
@@ -324,36 +760,98 @@ const Services = () => {
           WHY CHOOSE US
       ===================================================== */}
 
-            <section className="bg-slate-950 px-5 py-20 sm:px-6 sm:py-28">
+            <section
+                className="
+          relative
+          overflow-hidden
+          bg-[#080D17]
+          px-5
+          py-20
+          text-white
+          sm:px-6
+          sm:py-28
+          lg:px-8
+        "
+            >
 
-                <div className="mx-auto max-w-7xl">
+                {/* Glow */}
 
-                    <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
+                <div
+                    className="
+            pointer-events-none
+            absolute
+            -left-40
+            top-1/2
+            h-[450px]
+            w-[450px]
+            -translate-y-1/2
+            rounded-full
+            bg-orange-500/10
+            blur-[150px]
+          "
+                />
+
+                <div className="relative mx-auto max-w-7xl">
+
+                    <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-20">
 
                         {/* Left */}
 
                         <div>
 
-                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-400 sm:text-sm">
+                            <p
+                                className="
+                  text-xs
+                  font-black
+                  uppercase
+                  tracking-[0.22em]
+                  text-orange-400
+                "
+                            >
                                 Why Choose Us
                             </p>
 
-                            <h2 className="mt-5 text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
+                            <h2
+                                className="
+                  mt-5
+                  max-w-xl
+                  text-3xl
+                  font-black
+                  leading-tight
+                  tracking-tight
+                  sm:text-4xl
+                  lg:text-5xl
+                "
+                            >
                                 Service That
-                                <span className="text-orange-500"> Goes Beyond </span>
-                                The Repair.
+
+                                <span className="text-orange-500">
+                                    {" "}Goes Beyond
+                                </span>
+
+                                {" "}The Repair.
                             </h2>
 
-                            <p className="mt-5 max-w-xl text-base leading-7 text-slate-400 sm:mt-6 sm:text-lg sm:leading-8">
-                                Our goal is not simply to repair a machine. We help
-                                customers find reliable solutions for their tools and
-                                equipment.
+                            <p
+                                className="
+                  mt-5
+                  max-w-xl
+                  text-sm
+                  leading-7
+                  text-slate-400
+                  sm:text-base
+                  sm:leading-8
+                "
+                            >
+                                Our goal is not simply to repair a machine.
+                                We help customers find reliable solutions
+                                for their tools and equipment.
                             </p>
 
                             <a
                                 href="tel:+919871238460"
                                 className="
-                  mt-7
+                  mt-8
                   inline-flex
                   items-center
                   gap-3
@@ -361,7 +859,7 @@ const Services = () => {
                   bg-orange-500
                   px-6
                   py-3.5
-                  font-bold
+                  font-black
                   text-white
                   shadow-lg
                   shadow-orange-500/20
@@ -369,19 +867,21 @@ const Services = () => {
                   duration-300
                   hover:-translate-y-1
                   hover:bg-orange-600
-                  sm:mt-8
                   sm:px-7
                   sm:py-4
                 "
                             >
+
                                 <Phone size={18} />
-                                Call Now
+
+                                Call +91 98712 38460
+
                             </a>
 
                         </div>
 
 
-                        {/* Right */}
+                        {/* Right cards */}
 
                         <div className="grid gap-4 sm:grid-cols-2">
 
@@ -402,39 +902,73 @@ const Services = () => {
                                     title: "Customer First",
                                     text: "Helpful guidance based on your actual requirement.",
                                 },
-                            ].map((item) => (
+                            ].map((item, index) => (
+
                                 <div
                                     key={item.title}
                                     className="
-                    rounded-[24px]
+                    group
+                    rounded-[26px]
                     border
                     border-white/10
-                    bg-white/[0.05]
+                    bg-white/[0.045]
                     p-6
-                    shadow-lg
+                    shadow-[0_20px_50px_rgba(0,0,0,0.18)]
+                    backdrop-blur-xl
                     transition-all
                     duration-300
                     hover:-translate-y-1
                     hover:border-orange-500/30
-                    hover:bg-white/[0.08]
-                    sm:rounded-[28px]
+                    hover:bg-white/[0.07]
                     sm:p-7
                   "
                                 >
 
-                                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400">
+                                    <div
+                                        className="
+                      flex
+                      h-11
+                      w-11
+                      items-center
+                      justify-center
+                      rounded-xl
+                      bg-orange-500/10
+                      text-orange-400
+                      transition-all
+                      duration-300
+                      group-hover:bg-orange-500
+                      group-hover:text-white
+                    "
+                                    >
                                         <CheckCircle2 size={21} />
                                     </div>
 
-                                    <h3 className="mt-5 text-lg font-bold text-white sm:text-xl">
-                                        {item.title}
-                                    </h3>
+                                    <div className="mt-5 flex items-center justify-between">
 
-                                    <p className="mt-3 text-sm leading-7 text-slate-400 sm:text-base">
+                                        <h3 className="text-lg font-black sm:text-xl">
+                                            {item.title}
+                                        </h3>
+
+                                        <span className="text-xs font-black text-slate-600">
+                                            0{index + 1}
+                                        </span>
+
+                                    </div>
+
+                                    <p
+                                        className="
+                      mt-3
+                      text-sm
+                      leading-7
+                      text-slate-400
+                      sm:text-base
+                    "
+                                    >
                                         {item.text}
                                     </p>
 
                                 </div>
+
                             ))}
 
                         </div>
@@ -447,48 +981,170 @@ const Services = () => {
 
 
             {/* =====================================================
-          CTA
+          FINAL CTA
       ===================================================== */}
 
-            <section className="bg-[#f6f5f1] px-5 py-16 sm:px-6 sm:py-20">
+            <section
+                className="
+          bg-[#f6f5f1]
+          px-5
+          py-16
+          dark:bg-[#070B14]
+          sm:px-6
+          sm:py-24
+          lg:px-8
+        "
+            >
 
-                <div className="mx-auto max-w-5xl rounded-[28px] bg-gradient-to-r from-orange-500 to-orange-600 px-7 py-12 text-center shadow-[0_25px_70px_rgba(249,115,22,0.25)] sm:rounded-[36px] sm:px-12 sm:py-14">
+                <div
+                    className="
+            relative
+            mx-auto
+            max-w-5xl
+            overflow-hidden
+            rounded-[30px]
+            bg-gradient-to-br
+            from-orange-500
+            via-orange-500
+            to-orange-600
+            px-7
+            py-12
+            text-center
+            shadow-[0_30px_90px_rgba(249,115,22,0.25)]
+            sm:rounded-[38px]
+            sm:px-12
+            sm:py-16
+          "
+                >
 
-                    <h2 className="text-3xl font-black text-white sm:text-4xl">
-                        Need Help With Your Machine?
-                    </h2>
+                    {/* Decorative glow */}
 
-                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-orange-50 sm:text-base sm:leading-8">
-                        Talk to Deepak Repairing Center about repairs, power tools
-                        and genuine spare parts.
-                    </p>
-
-                    <a
-                        href="/contact"
+                    <div
                         className="
-              mt-7
-              inline-flex
-              items-center
-              gap-3
-              rounded-2xl
-              bg-white
-              px-6
-              py-3.5
-              font-bold
-              text-orange-600
-              shadow-lg
-              transition-all
-              duration-300
-              hover:-translate-y-1
-              hover:shadow-xl
-              sm:mt-8
-              sm:px-7
-              sm:py-4
+              pointer-events-none
+              absolute
+              -right-20
+              -top-20
+              h-60
+              w-60
+              rounded-full
+              bg-white/10
+              blur-3xl
             "
-                    >
-                        Contact Us
-                        <ArrowRight size={18} />
-                    </a>
+                    />
+
+                    <div
+                        className="
+              pointer-events-none
+              absolute
+              -bottom-24
+              -left-16
+              h-56
+              w-56
+              rounded-full
+              bg-black/10
+              blur-3xl
+            "
+                    />
+
+                    <div className="relative">
+
+                        <p className="text-xs font-black uppercase tracking-[0.2em] text-orange-100">
+                            Need Assistance?
+                        </p>
+
+                        <h2
+                            className="
+                mt-4
+                text-3xl
+                font-black
+                tracking-tight
+                text-white
+                sm:text-4xl
+              "
+                        >
+                            Need Help With Your Machine?
+                        </h2>
+
+                        <p
+                            className="
+                mx-auto
+                mt-4
+                max-w-2xl
+                text-sm
+                leading-7
+                text-orange-50
+                sm:text-base
+                sm:leading-8
+              "
+                        >
+                            Talk to Deepak Repairing Center about
+                            repairs, power tools and genuine spare parts.
+                        </p>
+
+                        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+
+                            <NavLink
+                                to="/contact"
+                                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-3
+                  rounded-2xl
+                  bg-white
+                  px-7
+                  py-4
+                  text-sm
+                  font-black
+                  text-orange-600
+                  shadow-xl
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:shadow-2xl
+                "
+                            >
+
+                                Contact Us
+
+                                <ArrowRight size={18} />
+
+                            </NavLink>
+
+                            <a
+                                href="tel:+919871238460"
+                                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-3
+                  rounded-2xl
+                  border
+                  border-white/30
+                  bg-white/10
+                  px-7
+                  py-4
+                  text-sm
+                  font-black
+                  text-white
+                  backdrop-blur-xl
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:bg-white/20
+                "
+                            >
+
+                                <Phone size={18} />
+
+                                +91 98712 38460
+
+                            </a>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
