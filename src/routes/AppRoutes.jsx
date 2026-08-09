@@ -5,6 +5,7 @@ import About from "../about/About";
 import Services from "../services/Services";
 import Gallery from "../gallery/Gallery";
 import Contact from "../contact/Contact";
+import TrackRepair from "../track/TrackRepair";
 
 import AdminLogin from "../admin/AdminLogin";
 import AdminDashboard from "../admin/AdminDashboard";
@@ -38,6 +39,11 @@ const AppRoutes = () => {
             <Route
                 path="/contact"
                 element={<Contact />}
+            />
+
+            <Route
+                path="/track-repair"
+                element={<TrackRepair />}
             />
 
             {/* ================= ADMIN ROUTES ================= */}

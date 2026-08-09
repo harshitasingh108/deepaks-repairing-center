@@ -41,6 +41,10 @@ const Navbar = ({ language, changeLanguage }) => {
             path: "/about",
         },
         {
+            name: "Track Repair",
+            path: "/track-repair",
+        },
+        {
             name: intl.formatMessage({ id: "nav.contact" }),
             path: "/contact",
         },
@@ -215,7 +219,6 @@ const Navbar = ({ language, changeLanguage }) => {
 
                     </NavLink>
 
-
                     {/* DESKTOP MENU */}
 
                     <div className="hidden items-center lg:flex">
@@ -295,7 +298,6 @@ const Navbar = ({ language, changeLanguage }) => {
 
                     </div>
 
-
                     {/* RIGHT SIDE */}
 
                     <div className="hidden items-center gap-2 lg:flex">
@@ -345,7 +347,9 @@ const Navbar = ({ language, changeLanguage }) => {
                                     className="text-orange-500"
                                 />
 
-                                {language === "en" ? "EN" : "हिंदी"}
+                                {language === "en"
+                                    ? "EN"
+                                    : "हिंदी"}
 
                                 <ChevronDown
                                     size={13}
@@ -359,7 +363,6 @@ const Navbar = ({ language, changeLanguage }) => {
                                 />
 
                             </button>
-
 
                             {languageOpen && (
 
@@ -411,9 +414,7 @@ const Navbar = ({ language, changeLanguage }) => {
                                         English
 
                                         {language === "en" && "✓"}
-
                                     </button>
-
 
                                     <button
                                         type="button"
@@ -444,7 +445,6 @@ const Navbar = ({ language, changeLanguage }) => {
                                         हिंदी
 
                                         {language === "hi" && "✓"}
-
                                     </button>
 
                                 </div>
@@ -452,7 +452,6 @@ const Navbar = ({ language, changeLanguage }) => {
                             )}
 
                         </div>
-
 
                         {/* DARK / LIGHT */}
 
@@ -508,7 +507,6 @@ const Navbar = ({ language, changeLanguage }) => {
                             </span>
 
                         </button>
-
 
                         {/* CALL NOW */}
 
@@ -566,7 +564,6 @@ const Navbar = ({ language, changeLanguage }) => {
 
                     </div>
 
-
                     {/* MOBILE BUTTON */}
 
                     <button
@@ -603,7 +600,6 @@ const Navbar = ({ language, changeLanguage }) => {
                     </button>
 
                 </div>
-
 
                 {/* MOBILE MENU */}
 
@@ -655,7 +651,6 @@ const Navbar = ({ language, changeLanguage }) => {
 
                             ))}
 
-
                             {/* MOBILE LANGUAGE + THEME */}
 
                             <div className="mt-4 grid grid-cols-2 gap-2">
@@ -698,7 +693,6 @@ const Navbar = ({ language, changeLanguage }) => {
 
                                 </button>
 
-
                                 <button
                                     type="button"
                                     onClick={toggleTheme}
@@ -735,7 +729,6 @@ const Navbar = ({ language, changeLanguage }) => {
                                 </button>
 
                             </div>
-
 
                             {/* MOBILE CALL */}
 
