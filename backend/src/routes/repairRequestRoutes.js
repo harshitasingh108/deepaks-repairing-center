@@ -8,16 +8,20 @@ const {
     deleteRepairRequest,
 } = require("../controllers/repairRequestController");
 
+const authMiddleware = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
-router.get("/", getRepairRequests);
-
-router.get("/:id", getRepairRequestById);
-
+// Customer can submit a repair request
 router.post("/", createRepairRequest);
 
-router.put("/:id", updateRepairRequest);
+// Admin-only routes
+router.get("/", authMiddleware, getRepairRequests);
 
-router.delete("/:id", deleteRepairRequest);
+router.get("/:id", authMiddleware, getRepairRequestById);
+
+router.put("/:id", authMiddleware, updateRepairRequest);
+
+router.delete("/:id", authMiddleware, deleteRepairRequest);
 
 module.exports = router;
