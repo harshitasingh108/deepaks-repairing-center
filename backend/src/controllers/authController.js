@@ -121,7 +121,36 @@ const loginAdmin = async (req, res) => {
     }
 };
 
+// ================= GET CURRENT ADMIN =================
+
+const getCurrentAdmin = async (req, res) => {
+    try {
+        const admin = await Admin.findById(req.admin.id).select(
+            "-password"
+        );
+
+        if (!admin) {
+            return res.status(404).json({
+                success: false,
+                message: "Admin not found",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: admin,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch admin",
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     registerAdmin,
     loginAdmin,
+    getCurrentAdmin,
 };
