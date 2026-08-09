@@ -26,30 +26,31 @@ const App = () => {
     localStorage.setItem("language", newLanguage);
   };
 
+  const isAdminPage =
+    window.location.pathname.startsWith("/admin");
+
   return (
     <ThemeProvider>
-
       <IntlProvider
         locale={language}
         messages={messages[language]}
         defaultLocale="en"
       >
-
         <CursorGlow />
 
-        <Navbar
-          language={language}
-          changeLanguage={changeLanguage}
-        />
+        {!isAdminPage && (
+          <Navbar
+            language={language}
+            changeLanguage={changeLanguage}
+          />
+        )}
 
         <main>
           <AppRoutes />
         </main>
 
-        <Footer />
-
+        {!isAdminPage && <Footer />}
       </IntlProvider>
-
     </ThemeProvider>
   );
 };

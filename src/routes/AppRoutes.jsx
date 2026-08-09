@@ -6,19 +6,51 @@ import Services from "../services/Services";
 import Gallery from "../gallery/Gallery";
 import Contact from "../contact/Contact";
 
+import AdminLogin from "../admin/AdminLogin";
+import AdminDashboard from "../admin/AdminDashboard";
+
 const AppRoutes = () => {
     return (
         <Routes>
 
-            <Route path="/" element={<Home />} />
+            {/* ================= PUBLIC ROUTES ================= */}
 
-            <Route path="/about" element={<About />} />
+            <Route
+                path="/"
+                element={<Home />}
+            />
 
-            <Route path="/services" element={<Services />} />
+            <Route
+                path="/about"
+                element={<About />}
+            />
 
-            <Route path="/gallery" element={<Gallery />} />
+            <Route
+                path="/services"
+                element={<Services />}
+            />
 
-            <Route path="/contact" element={<Contact />} />
+            <Route
+                path="/gallery"
+                element={<Gallery />}
+            />
+
+            <Route
+                path="/contact"
+                element={<Contact />}
+            />
+
+            {/* ================= ADMIN ROUTES ================= */}
+
+            <Route
+                path="/admin/login"
+                element={<AdminLogin />}
+            />
+
+            <Route
+                path="/admin/dashboard"
+                element={<AdminDashboard />}
+            />
 
         </Routes>
     );
