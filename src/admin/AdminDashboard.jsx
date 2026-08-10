@@ -15,22 +15,34 @@ import {
     X,
     TrendingUp,
     CircleDot,
+    Sparkles,
 } from "lucide-react";
+
+const API_URL = "http://localhost:5000";
+
+// =====================================================
+// ADMIN DASHBOARD
+// =====================================================
 
 const AdminDashboard = () => {
     const [requests, setRequests] = useState([]);
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+
     const [updatingId, setUpdatingId] = useState(null);
+    const [analyzingId, setAnalyzingId] = useState(null);
+
+    const [aiAnalysis, setAiAnalysis] = useState({});
 
     const admin = JSON.parse(
         localStorage.getItem("admin") || "null"
     );
 
     // =====================================================
-    // FETCH REQUESTS
+    // FETCH REPAIR REQUESTS
     // =====================================================
 
     const fetchRequests = async () => {
@@ -48,7 +60,7 @@ const AdminDashboard = () => {
             }
 
             const response = await fetch(
-                "http://localhost:5000/api/repair-requests",
+                `${API_URL}/api/repair-requests`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -80,6 +92,11 @@ const AdminDashboard = () => {
 
             setRequests(data.data || []);
         } catch (error) {
+            console.error(
+                "Fetch Requests Error:",
+                error
+            );
+
             setError(
                 error.message ||
                 "Unable to load repair requests"
@@ -108,8 +125,14 @@ const AdminDashboard = () => {
             const token =
                 localStorage.getItem("adminToken");
 
+            if (!token) {
+                window.location.href =
+                    "/admin/login";
+                return;
+            }
+
             const response = await fetch(
-                `http://localhost:5000/api/repair-requests/${requestId}`,
+                `${API_URL}/api/repair-requests/${requestId}`,
                 {
                     method: "PUT",
                     headers: {
@@ -157,12 +180,102 @@ const AdminDashboard = () => {
                     )
             );
         } catch (error) {
+            console.error(
+                "Update Status Error:",
+                error
+            );
+
             setError(
                 error.message ||
                 "Unable to update request"
             );
         } finally {
             setUpdatingId(null);
+        }
+    };
+
+    // =====================================================
+    // AI REPAIR ANALYSIS
+    // =====================================================
+
+    const analyzeRepair = async (request) => {
+        try {
+            setAnalyzingId(request._id);
+            setError("");
+
+            const token =
+                localStorage.getItem("adminToken");
+
+            if (!token) {
+                window.location.href =
+                    "/admin/login";
+                return;
+            }
+
+            const response = await fetch(
+                `${API_URL}/api/ai/analyze`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        name: request.name,
+                        machine:
+                            request.machine,
+                        brand: request.brand,
+                        service:
+                            request.service,
+                        message:
+                            request.message,
+                    }),
+                }
+            );
+
+            const data =
+                await response.json();
+
+            if (response.status === 401) {
+                localStorage.removeItem(
+                    "adminToken"
+                );
+
+                localStorage.removeItem("admin");
+
+                window.location.href =
+                    "/admin/login";
+
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message ||
+                    "AI analysis failed"
+                );
+            }
+
+            setAiAnalysis(
+                (currentAnalysis) => ({
+                    ...currentAnalysis,
+                    [request._id]:
+                        data.data,
+                })
+            );
+        } catch (error) {
+            console.error(
+                "AI Analysis Error:",
+                error
+            );
+
+            setError(
+                error.message ||
+                "Unable to analyze repair request"
+            );
+        } finally {
+            setAnalyzingId(null);
         }
     };
 
@@ -200,17 +313,20 @@ const AdminDashboard = () => {
 
         const inProgress = requests.filter(
             (request) =>
-                request.status === "in-progress"
+                request.status ===
+                "in-progress"
         ).length;
 
         const completed = requests.filter(
             (request) =>
-                request.status === "completed"
+                request.status ===
+                "completed"
         ).length;
 
         const cancelled = requests.filter(
             (request) =>
-                request.status === "cancelled"
+                request.status ===
+                "cancelled"
         ).length;
 
         const completionRate =
@@ -357,9 +473,6 @@ const AdminDashboard = () => {
                     hover:bg-white/[0.065]
                 "
             >
-
-                {/* Glow */}
-
                 <div
                     className="
                         pointer-events-none
@@ -405,23 +518,22 @@ const AdminDashboard = () => {
                         {title}
                     </p>
 
-                    <div className="mt-1 flex items-end gap-2">
-
-                        <p className="text-3xl font-black tracking-tight text-white">
-                            {value}
-                        </p>
-
-                    </div>
+                    <p className="mt-1 text-3xl font-black tracking-tight text-white">
+                        {value}
+                    </p>
 
                     <p className="mt-1 text-[11px] text-slate-600">
                         {description}
                     </p>
 
                 </div>
-
             </div>
         );
     };
+
+    // =====================================================
+    // MAIN UI
+    // =====================================================
 
     return (
         <main
@@ -440,9 +552,9 @@ const AdminDashboard = () => {
 
             <div className="mx-auto max-w-7xl">
 
-                {/* =====================================================
+                {/* =================================================
                     HEADER
-                ===================================================== */}
+                ================================================= */}
 
                 <header className="mb-7">
 
@@ -504,12 +616,12 @@ const AdminDashboard = () => {
                                     <span className="font-bold text-slate-300">
                                         {admin.name}
                                     </span>
-                                    <span className="ml-2 text-slate-700">
+
+                                    <span className="mx-2 text-slate-700">
                                         •
                                     </span>
-                                    <span className="ml-2">
-                                        Manage customer repair requests
-                                    </span>
+
+                                    Manage customer repair requests
                                 </p>
                             )}
 
@@ -590,21 +702,17 @@ const AdminDashboard = () => {
 
                 </header>
 
-                {/* =====================================================
+                {/* =================================================
                     ANALYTICS
-                ===================================================== */}
+                ================================================= */}
 
                 <section className="mb-7">
 
                     <div className="mb-3 flex items-center justify-between">
 
-                        <div>
-
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-600">
-                                Overview
-                            </p>
-
-                        </div>
+                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-600">
+                            Overview
+                        </p>
 
                         <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-600">
 
@@ -679,7 +787,7 @@ const AdminDashboard = () => {
 
                     </div>
 
-                    {/* COMPLETION PROGRESS */}
+                    {/* COMPLETION RATE */}
 
                     <div
                         className="
@@ -745,9 +853,9 @@ const AdminDashboard = () => {
 
                 </section>
 
-                {/* =====================================================
+                {/* =================================================
                     SEARCH + FILTER
-                ===================================================== */}
+                ================================================= */}
 
                 <section
                     className="
@@ -764,8 +872,6 @@ const AdminDashboard = () => {
                 >
 
                     <div className="flex flex-col gap-3 lg:flex-row">
-
-                        {/* SEARCH */}
 
                         <div className="relative min-w-0 flex-1">
 
@@ -831,8 +937,6 @@ const AdminDashboard = () => {
 
                         </div>
 
-                        {/* FILTER */}
-
                         <div className="relative lg:w-52">
 
                             <Filter
@@ -872,6 +976,7 @@ const AdminDashboard = () => {
                                     focus:border-orange-500/40
                                 "
                             >
+
                                 <option value="all">
                                     All Status
                                 </option>
@@ -895,6 +1000,7 @@ const AdminDashboard = () => {
                                 <option value="cancelled">
                                     Cancelled
                                 </option>
+
                             </select>
 
                         </div>
@@ -951,9 +1057,9 @@ const AdminDashboard = () => {
 
                 </section>
 
-                {/* =====================================================
+                {/* =================================================
                     ERROR
-                ===================================================== */}
+                ================================================= */}
 
                 {error && (
                     <div
@@ -972,19 +1078,36 @@ const AdminDashboard = () => {
                             text-red-300
                         "
                     >
+
                         <AlertCircle
                             size={18}
                             className="mt-0.5 shrink-0"
                         />
 
-                        <p>{error}</p>
+                        <div className="flex-1">
+
+                            <p className="font-semibold">
+                                {error}
+                            </p>
+
+                            {error.toLowerCase().includes(
+                                "ai"
+                            ) && (
+                                    <p className="mt-1 text-xs text-red-300/60">
+                                        The AI feature may require
+                                        an active API key and
+                                        available API credits.
+                                    </p>
+                                )}
+
+                        </div>
 
                     </div>
                 )}
 
-                {/* =====================================================
+                {/* =================================================
                     LOADING
-                ===================================================== */}
+                ================================================= */}
 
                 {loading && (
                     <div
@@ -1015,10 +1138,12 @@ const AdminDashboard = () => {
                                     text-orange-400
                                 "
                             >
+
                                 <RefreshCw
                                     size={24}
                                     className="animate-spin"
                                 />
+
                             </div>
 
                             <p className="mt-4 text-sm font-semibold text-slate-400">
@@ -1034,9 +1159,9 @@ const AdminDashboard = () => {
                     </div>
                 )}
 
-                {/* =====================================================
+                {/* =================================================
                     EMPTY
-                ===================================================== */}
+                ================================================= */}
 
                 {!loading &&
                     !error &&
@@ -1111,9 +1236,9 @@ const AdminDashboard = () => {
                         </div>
                     )}
 
-                {/* =====================================================
-                    REQUESTS
-                ===================================================== */}
+                {/* =================================================
+                    REQUEST LIST
+                ================================================= */}
 
                 {!loading &&
                     !error &&
@@ -1136,7 +1261,10 @@ const AdminDashboard = () => {
                                 </div>
 
                                 <span className="rounded-full border border-orange-400/10 bg-orange-500/[0.06] px-3 py-1.5 text-[10px] font-bold text-orange-400">
-                                    {filteredRequests.length} active view
+                                    {
+                                        filteredRequests.length
+                                    }{" "}
+                                    requests
                                 </span>
 
                             </div>
@@ -1144,78 +1272,250 @@ const AdminDashboard = () => {
                             <div className="space-y-4">
 
                                 {filteredRequests.map(
-                                    (request) => (
+                                    (request) => {
 
-                                        <article
-                                            key={
-                                                request._id
-                                            }
-                                            className="
-                                                group
-                                                overflow-hidden
-                                                rounded-[26px]
-                                                border
-                                                border-white/[0.08]
-                                                bg-white/[0.035]
-                                                shadow-[0_18px_50px_rgba(0,0,0,0.12)]
-                                                backdrop-blur-xl
-                                                transition-all
-                                                duration-300
-                                                hover:border-white/[0.13]
-                                                hover:bg-white/[0.05]
-                                            "
-                                        >
+                                        const analysis =
+                                            aiAnalysis[
+                                            request._id
+                                            ];
 
-                                            {/* TOP ACCENT */}
+                                        return (
+                                            <article
+                                                key={
+                                                    request._id
+                                                }
+                                                className="
+                                                    group
+                                                    overflow-hidden
+                                                    rounded-[26px]
+                                                    border
+                                                    border-white/[0.08]
+                                                    bg-white/[0.035]
+                                                    shadow-[0_18px_50px_rgba(0,0,0,0.12)]
+                                                    backdrop-blur-xl
+                                                    transition-all
+                                                    duration-300
+                                                    hover:border-white/[0.13]
+                                                    hover:bg-white/[0.05]
+                                                "
+                                            >
 
-                                            <div className="h-px w-full bg-gradient-to-r from-transparent via-orange-500/50 to-transparent opacity-50 transition group-hover:opacity-100" />
+                                                {/* TOP LINE */}
 
-                                            <div className="p-4 sm:p-6">
+                                                <div className="h-px w-full bg-gradient-to-r from-transparent via-orange-500/50 to-transparent opacity-50 transition group-hover:opacity-100" />
 
-                                                {/* =====================================================
-                                                    CUSTOMER HEADER
-                                                ===================================================== */}
+                                                <div className="p-4 sm:p-6">
 
-                                                <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+                                                    {/* CUSTOMER */}
 
-                                                    <div className="min-w-0">
+                                                    <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
 
-                                                        <div className="flex items-center gap-3">
+                                                        <div className="min-w-0">
 
-                                                            <div
-                                                                className="
-                                                                    flex
-                                                                    h-11
-                                                                    w-11
-                                                                    shrink-0
-                                                                    items-center
-                                                                    justify-center
-                                                                    rounded-2xl
-                                                                    bg-orange-500/10
-                                                                    text-orange-400
-                                                                    ring-1
-                                                                    ring-orange-500/10
-                                                                "
-                                                            >
-                                                                <User
-                                                                    size={
-                                                                        20
-                                                                    }
-                                                                />
+                                                            <div className="flex items-center gap-3">
+
+                                                                <div
+                                                                    className="
+                                                                        flex
+                                                                        h-11
+                                                                        w-11
+                                                                        shrink-0
+                                                                        items-center
+                                                                        justify-center
+                                                                        rounded-2xl
+                                                                        bg-orange-500/10
+                                                                        text-orange-400
+                                                                        ring-1
+                                                                        ring-orange-500/10
+                                                                    "
+                                                                >
+                                                                    <User
+                                                                        size={
+                                                                            20
+                                                                        }
+                                                                    />
+                                                                </div>
+
+                                                                <div className="min-w-0">
+
+                                                                    <h3 className="truncate text-base font-black text-white sm:text-lg">
+                                                                        {
+                                                                            request.name
+                                                                        }
+                                                                    </h3>
+
+                                                                    <p className="mt-0.5 truncate text-[10px] text-slate-700">
+                                                                        Request ID:{" "}
+                                                                        {
+                                                                            request._id
+                                                                        }
+                                                                    </p>
+
+                                                                </div>
+
                                                             </div>
 
-                                                            <div className="min-w-0">
+                                                            {/* CONTACT */}
 
-                                                                <h3 className="truncate text-base font-black text-white sm:text-lg">
+                                                            <div className="mt-4 flex flex-col gap-2 text-xs text-slate-400 sm:flex-row sm:flex-wrap sm:gap-x-6">
+
+                                                                <div className="flex items-center gap-2">
+
+                                                                    <Phone
+                                                                        size={
+                                                                            14
+                                                                        }
+                                                                        className="text-orange-400"
+                                                                    />
+
                                                                     {
-                                                                        request.name
+                                                                        request.phone
                                                                     }
-                                                                </h3>
 
-                                                                <p className="mt-0.5 truncate text-[10px] text-slate-700">
-                                                                    Request ID:{" "}
-                                                                    {
+                                                                </div>
+
+                                                                {request.email && (
+                                                                    <div className="flex min-w-0 items-center gap-2">
+
+                                                                        <Mail
+                                                                            size={
+                                                                                14
+                                                                            }
+                                                                            className="shrink-0 text-orange-400"
+                                                                        />
+
+                                                                        <span className="truncate">
+                                                                            {
+                                                                                request.email
+                                                                            }
+                                                                        </span>
+
+                                                                    </div>
+                                                                )}
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        {/* STATUS */}
+
+                                                        <div className="w-full xl:w-52">
+
+                                                            <div className="mb-2 flex items-center justify-between">
+
+                                                                <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                                                                    Status
+                                                                </label>
+
+                                                                {updatingId ===
+                                                                    request._id && (
+                                                                        <span className="text-[10px] font-bold text-orange-400">
+                                                                            Updating...
+                                                                        </span>
+                                                                    )}
+
+                                                            </div>
+
+                                                            <select
+                                                                value={
+                                                                    request.status ||
+                                                                    "pending"
+                                                                }
+                                                                disabled={
+                                                                    updatingId ===
+                                                                    request._id
+                                                                }
+                                                                onChange={(
+                                                                    event
+                                                                ) =>
+                                                                    updateStatus(
+                                                                        request._id,
+                                                                        event
+                                                                            .target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                                className={`
+                                                                    w-full
+                                                                    rounded-xl
+                                                                    border
+                                                                    px-4
+                                                                    py-3
+                                                                    text-sm
+                                                                    font-bold
+                                                                    outline-none
+                                                                    transition-all
+                                                                    ${getStatusClass(
+                                                                    request.status
+                                                                )}
+                                                                    ${updatingId ===
                                                                         request._id
+                                                                        ? "cursor-wait opacity-50"
+                                                                        : "cursor-pointer"
+                                                                    }
+                                                                `}
+                                                            >
+
+                                                                <option value="pending">
+                                                                    Pending
+                                                                </option>
+
+                                                                <option value="contacted">
+                                                                    Contacted
+                                                                </option>
+
+                                                                <option value="in-progress">
+                                                                    In Progress
+                                                                </option>
+
+                                                                <option value="completed">
+                                                                    Completed
+                                                                </option>
+
+                                                                <option value="cancelled">
+                                                                    Cancelled
+                                                                </option>
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    {/* MACHINE DETAILS */}
+
+                                                    <div
+                                                        className="
+                                                            mt-5
+                                                            grid
+                                                            grid-cols-1
+                                                            gap-2
+                                                            border-t
+                                                            border-white/[0.06]
+                                                            pt-5
+                                                            sm:grid-cols-3
+                                                        "
+                                                    >
+
+                                                        <div className="rounded-2xl border border-white/[0.05] bg-black/15 p-4 transition hover:bg-black/25">
+
+                                                            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-700">
+                                                                Machine
+                                                            </p>
+
+                                                            <div className="mt-2 flex items-center gap-2">
+
+                                                                <Wrench
+                                                                    size={
+                                                                        14
+                                                                    }
+                                                                    className="text-orange-400"
+                                                                />
+
+                                                                <p className="truncate text-sm font-bold text-slate-200">
+                                                                    {
+                                                                        request.machine ||
+                                                                        "Not specified"
                                                                     }
                                                                 </p>
 
@@ -1223,168 +1523,30 @@ const AdminDashboard = () => {
 
                                                         </div>
 
-                                                        {/* CONTACT */}
+                                                        <div className="rounded-2xl border border-white/[0.05] bg-black/15 p-4 transition hover:bg-black/25">
 
-                                                        <div className="mt-4 flex flex-col gap-2 text-xs text-slate-400 sm:flex-row sm:flex-wrap sm:gap-x-6">
+                                                            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-700">
+                                                                Brand
+                                                            </p>
 
-                                                            <div className="flex items-center gap-2">
-
-                                                                <Phone
-                                                                    size={
-                                                                        14
-                                                                    }
-                                                                    className="text-orange-400"
-                                                                />
-
+                                                            <p className="mt-2 truncate text-sm font-bold text-slate-200">
                                                                 {
-                                                                    request.phone
+                                                                    request.brand ||
+                                                                    "Not specified"
                                                                 }
-
-                                                            </div>
-
-                                                            {request.email && (
-                                                                <div className="flex min-w-0 items-center gap-2">
-
-                                                                    <Mail
-                                                                        size={
-                                                                            14
-                                                                        }
-                                                                        className="shrink-0 text-orange-400"
-                                                                    />
-
-                                                                    <span className="truncate">
-                                                                        {
-                                                                            request.email
-                                                                        }
-                                                                    </span>
-
-                                                                </div>
-                                                            )}
+                                                            </p>
 
                                                         </div>
 
-                                                    </div>
+                                                        <div className="rounded-2xl border border-white/[0.05] bg-black/15 p-4 transition hover:bg-black/25">
 
-                                                    {/* STATUS */}
+                                                            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-700">
+                                                                Service
+                                                            </p>
 
-                                                    <div className="w-full xl:w-52">
-
-                                                        <div className="mb-2 flex items-center justify-between">
-
-                                                            <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-600">
-                                                                Status
-                                                            </label>
-
-                                                            {updatingId ===
-                                                                request._id && (
-                                                                    <span className="text-[10px] font-bold text-orange-400">
-                                                                        Updating...
-                                                                    </span>
-                                                                )}
-
-                                                        </div>
-
-                                                        <select
-                                                            value={
-                                                                request.status ||
-                                                                "pending"
-                                                            }
-                                                            disabled={
-                                                                updatingId ===
-                                                                request._id
-                                                            }
-                                                            onChange={(
-                                                                event
-                                                            ) =>
-                                                                updateStatus(
-                                                                    request._id,
-                                                                    event
-                                                                        .target
-                                                                        .value
-                                                                )
-                                                            }
-                                                            className={`
-                                                                w-full
-                                                                rounded-xl
-                                                                border
-                                                                px-4
-                                                                py-3
-                                                                text-sm
-                                                                font-bold
-                                                                outline-none
-                                                                transition-all
-                                                                ${getStatusClass(
-                                                                request.status
-                                                            )}
-                                                                ${updatingId ===
-                                                                    request._id
-                                                                    ? "cursor-wait opacity-50"
-                                                                    : "cursor-pointer"
-                                                                }
-                                                            `}
-                                                        >
-
-                                                            <option value="pending">
-                                                                Pending
-                                                            </option>
-
-                                                            <option value="contacted">
-                                                                Contacted
-                                                            </option>
-
-                                                            <option value="in-progress">
-                                                                In Progress
-                                                            </option>
-
-                                                            <option value="completed">
-                                                                Completed
-                                                            </option>
-
-                                                            <option value="cancelled">
-                                                                Cancelled
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                </div>
-
-                                                {/* =====================================================
-                                                    MACHINE DETAILS
-                                                ===================================================== */}
-
-                                                <div
-                                                    className="
-                                                        mt-5
-                                                        grid
-                                                        grid-cols-1
-                                                        gap-2
-                                                        border-t
-                                                        border-white/[0.06]
-                                                        pt-5
-                                                        sm:grid-cols-3
-                                                    "
-                                                >
-
-                                                    <div className="rounded-2xl border border-white/[0.05] bg-black/15 p-4 transition hover:bg-black/25">
-
-                                                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-700">
-                                                            Machine
-                                                        </p>
-
-                                                        <div className="mt-2 flex items-center gap-2">
-
-                                                            <Wrench
-                                                                size={
-                                                                    14
-                                                                }
-                                                                className="text-orange-400"
-                                                            />
-
-                                                            <p className="truncate text-sm font-bold text-slate-200">
+                                                            <p className="mt-2 truncate text-sm font-bold text-slate-200">
                                                                 {
-                                                                    request.machine ||
+                                                                    request.service ||
                                                                     "Not specified"
                                                                 }
                                                             </p>
@@ -1393,118 +1555,326 @@ const AdminDashboard = () => {
 
                                                     </div>
 
-                                                    <div className="rounded-2xl border border-white/[0.05] bg-black/15 p-4 transition hover:bg-black/25">
+                                                    {/* CUSTOMER MESSAGE */}
 
-                                                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-700">
-                                                            Brand
-                                                        </p>
-
-                                                        <p className="mt-2 truncate text-sm font-bold text-slate-200">
-                                                            {
-                                                                request.brand ||
-                                                                "Not specified"
-                                                            }
-                                                        </p>
-
-                                                    </div>
-
-                                                    <div className="rounded-2xl border border-white/[0.05] bg-black/15 p-4 transition hover:bg-black/25">
-
-                                                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-700">
-                                                            Service
-                                                        </p>
-
-                                                        <p className="mt-2 truncate text-sm font-bold text-slate-200">
-                                                            {
-                                                                request.service ||
-                                                                "Not specified"
-                                                            }
-                                                        </p>
-
-                                                    </div>
-
-                                                </div>
-
-                                                {/* =====================================================
-                                                    MESSAGE
-                                                ===================================================== */}
-
-                                                {request.message && (
-                                                    <div className="mt-2 rounded-2xl border border-white/[0.05] bg-black/15 p-4">
-
-                                                        <div className="flex items-center justify-between">
+                                                    {request.message && (
+                                                        <div className="mt-2 rounded-2xl border border-white/[0.05] bg-black/15 p-4">
 
                                                             <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-700">
                                                                 Customer Message
                                                             </p>
 
-                                                            <span className="text-[9px] text-slate-700">
-                                                                Request details
+                                                            <p className="mt-2 text-sm leading-6 text-slate-400">
+                                                                {
+                                                                    request.message
+                                                                }
+                                                            </p>
+
+                                                        </div>
+                                                    )}
+
+                                                    {/* =================================================
+                                                        AI ANALYSIS
+                                                    ================================================= */}
+
+                                                    <div
+                                                        className="
+                                                            mt-4
+                                                            overflow-hidden
+                                                            rounded-2xl
+                                                            border
+                                                            border-orange-400/10
+                                                            bg-gradient-to-br
+                                                            from-orange-500/[0.055]
+                                                            to-transparent
+                                                        "
+                                                    >
+
+                                                        <div className="p-4">
+
+                                                            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+                                                                <div className="flex items-start gap-3">
+
+                                                                    <div
+                                                                        className="
+                                                                            flex
+                                                                            h-10
+                                                                            w-10
+                                                                            shrink-0
+                                                                            items-center
+                                                                            justify-center
+                                                                            rounded-xl
+                                                                            bg-orange-500/10
+                                                                            text-orange-400
+                                                                        "
+                                                                    >
+                                                                        <Sparkles
+                                                                            size={
+                                                                                18
+                                                                            }
+                                                                        />
+                                                                    </div>
+
+                                                                    <div>
+
+                                                                        <p className="text-sm font-black text-slate-200">
+                                                                            AI Repair Analysis
+                                                                        </p>
+
+                                                                        <p className="mt-1 max-w-xl text-[11px] leading-5 text-slate-600">
+                                                                            Get an AI-assisted assessment of the customer's repair problem.
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() =>
+                                                                        analyzeRepair(
+                                                                            request
+                                                                        )
+                                                                    }
+                                                                    disabled={
+                                                                        analyzingId ===
+                                                                        request._id
+                                                                    }
+                                                                    className="
+                                                                        flex
+                                                                        w-full
+                                                                        items-center
+                                                                        justify-center
+                                                                        gap-2
+                                                                        rounded-xl
+                                                                        bg-gradient-to-r
+                                                                        from-orange-500
+                                                                        to-orange-600
+                                                                        px-4
+                                                                        py-3
+                                                                        text-xs
+                                                                        font-black
+                                                                        text-white
+                                                                        shadow-lg
+                                                                        shadow-orange-500/10
+                                                                        transition-all
+                                                                        hover:-translate-y-0.5
+                                                                        hover:shadow-orange-500/20
+                                                                        disabled:cursor-wait
+                                                                        disabled:opacity-50
+                                                                        sm:w-auto
+                                                                    "
+                                                                >
+
+                                                                    <Sparkles
+                                                                        size={
+                                                                            15
+                                                                        }
+                                                                        className={
+                                                                            analyzingId ===
+                                                                                request._id
+                                                                                ? "animate-pulse"
+                                                                                : ""
+                                                                        }
+                                                                    />
+
+                                                                    {analyzingId ===
+                                                                        request._id
+                                                                        ? "Analyzing..."
+                                                                        : analysis
+                                                                            ? "Analyze Again"
+                                                                            : "Analyze with AI"}
+
+                                                                </button>
+
+                                                            </div>
+
+                                                            {/* AI RESULT */}
+
+                                                            {analysis && (
+                                                                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+
+                                                                    {/* POSSIBLE ISSUE */}
+
+                                                                    <div className="rounded-xl border border-white/[0.05] bg-black/20 p-4">
+
+                                                                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                                                                            Possible Issue
+                                                                        </p>
+
+                                                                        <p className="mt-2 text-sm font-bold leading-5 text-slate-200">
+                                                                            {
+                                                                                analysis.possibleIssue
+                                                                            }
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                    {/* PRIORITY */}
+
+                                                                    <div className="rounded-xl border border-white/[0.05] bg-black/20 p-4">
+
+                                                                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                                                                            Priority
+                                                                        </p>
+
+                                                                        <div className="mt-2">
+
+                                                                            <span
+                                                                                className={`
+                                                                                    inline-flex
+                                                                                    rounded-full
+                                                                                    border
+                                                                                    px-3
+                                                                                    py-1
+                                                                                    text-[10px]
+                                                                                    font-black
+                                                                                    ${analysis.priority ===
+                                                                                        "High"
+                                                                                        ? "border-red-400/20 bg-red-500/10 text-red-400"
+                                                                                        : analysis.priority ===
+                                                                                            "Medium"
+                                                                                            ? "border-yellow-400/20 bg-yellow-500/10 text-yellow-400"
+                                                                                            : "border-green-400/20 bg-green-500/10 text-green-400"
+                                                                                    }
+                                                                                `}
+                                                                            >
+                                                                                {
+                                                                                    analysis.priority
+                                                                                }
+                                                                            </span>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    {/* SERVICE */}
+
+                                                                    <div className="rounded-xl border border-white/[0.05] bg-black/20 p-4">
+
+                                                                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                                                                            Suggested Service
+                                                                        </p>
+
+                                                                        <p className="mt-2 text-sm font-bold leading-5 text-slate-200">
+                                                                            {
+                                                                                analysis.suggestedService
+                                                                            }
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                    {/* ACTION */}
+
+                                                                    <div className="rounded-xl border border-white/[0.05] bg-black/20 p-4">
+
+                                                                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                                                                            Recommended Action
+                                                                        </p>
+
+                                                                        <p className="mt-2 text-sm leading-5 text-slate-400">
+                                                                            {
+                                                                                analysis.recommendedAction
+                                                                            }
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                    {/* SAFETY */}
+
+                                                                    <div className="rounded-xl border border-yellow-400/10 bg-yellow-500/[0.035] p-4 sm:col-span-2">
+
+                                                                        <div className="flex items-center gap-2">
+
+                                                                            <AlertCircle
+                                                                                size={
+                                                                                    15
+                                                                                }
+                                                                                className="text-yellow-400"
+                                                                            />
+
+                                                                            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-yellow-500/80">
+                                                                                Safety Note
+                                                                            </p>
+
+                                                                        </div>
+
+                                                                        <p className="mt-2 text-sm leading-6 text-slate-400">
+                                                                            {
+                                                                                analysis.safetyNote
+                                                                            }
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                    {/* DISCLAIMER */}
+
+                                                                    <div className="sm:col-span-2">
+
+                                                                        <p className="text-[10px] leading-5 text-slate-700">
+                                                                            AI analysis is an assistance tool only. Final diagnosis and repair decisions should be made by a qualified technician.
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            )}
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    {/* FOOTER STATUS */}
+
+                                                    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+
+                                                        <div className="flex items-center gap-2">
+
+                                                            <span className="text-[10px] font-medium text-slate-700">
+                                                                Current status
+                                                            </span>
+
+                                                            <span
+                                                                className={`
+                                                                    rounded-full
+                                                                    border
+                                                                    px-3
+                                                                    py-1
+                                                                    text-[10px]
+                                                                    font-bold
+                                                                    ${getStatusClass(
+                                                                    request.status
+                                                                )}
+                                                                `}
+                                                            >
+                                                                {getStatusLabel(
+                                                                    request.status
+                                                                )}
                                                             </span>
 
                                                         </div>
 
-                                                        <p className="mt-2 text-sm leading-6 text-slate-400">
-                                                            {
-                                                                request.message
-                                                            }
-                                                        </p>
+                                                        <div className="flex items-center gap-1.5 text-[10px] text-slate-700">
 
-                                                    </div>
-                                                )}
+                                                            <CircleDot
+                                                                size={
+                                                                    11
+                                                                }
+                                                                className="text-green-500"
+                                                            />
 
-                                                {/* =====================================================
-                                                    FOOTER STATUS
-                                                ===================================================== */}
+                                                            Request synced
 
-                                                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-
-                                                    <div className="flex items-center gap-2">
-
-                                                        <span className="text-[10px] font-medium text-slate-700">
-                                                            Current status
-                                                        </span>
-
-                                                        <span
-                                                            className={`
-                                                                rounded-full
-                                                                border
-                                                                px-3
-                                                                py-1
-                                                                text-[10px]
-                                                                font-bold
-                                                                ${getStatusClass(
-                                                                request.status
-                                                            )}
-                                                            `}
-                                                        >
-                                                            {getStatusLabel(
-                                                                request.status
-                                                            )}
-                                                        </span>
-
-                                                    </div>
-
-                                                    <div className="flex items-center gap-1.5 text-[10px] text-slate-700">
-
-                                                        <CircleDot
-                                                            size={
-                                                                11
-                                                            }
-                                                            className="text-green-500"
-                                                        />
-
-                                                        Request synced
+                                                        </div>
 
                                                     </div>
 
                                                 </div>
 
-                                            </div>
-
-                                        </article>
-
-                                    )
+                                            </article>
+                                        );
+                                    }
                                 )}
 
                             </div>
