@@ -1,18 +1,49 @@
-const OpenAI = require("openai");
+const { GoogleGenAI } = require("@google/genai");
+const RepairRequest = require("../models/RepairRequest");
 
 // =====================================================
-// OPENAI CLIENT
+// GEMINI CLIENT
 // =====================================================
 
-const getOpenAIClient = () => {
-    if (!process.env.OPENAI_API_KEY) {
+const getGeminiClient = () => {
+    if (!process.env.GEMINI_API_KEY) {
         return null;
     }
 
-    return new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,
+    return new GoogleGenAI({
+        apiKey: process.env.GEMINI_API_KEY,
     });
 };
+
+// =====================================================
+// COMMON AI INSTRUCTIONS
+// =====================================================
+
+const SYSTEM_INSTRUCTIONS = `
+You are the AI Repair Assistant for Deepak Repairing Center.
+
+Your job is to help customers with power tools,
+machines, spare parts and repair services.
+
+IMPORTANT RULES:
+
+- Reply in the SAME language/style the customer uses.
+- Understand Hindi, Hinglish, WhatsApp-style language and English.
+- Keep replies friendly, natural, simple and concise.
+- Use emojis naturally when appropriate.
+- Never claim a final technical diagnosis.
+- Do not provide dangerous electrical or mechanical repair instructions.
+- Do not tell customers to open dangerous electrical equipment.
+- If a machine may be unsafe to operate, tell the customer to stop using it and get professional inspection.
+- When useful, suggest:
+  Machine Repair
+  Spare Parts
+  Maintenance
+  Inspection
+
+You are a customer-support assistant,
+not a replacement for a qualified technician.
+`;
 
 // =====================================================
 // CUSTOMER AI CHAT
@@ -29,9 +60,9 @@ const chatWithAI = async (req, res) => {
             });
         }
 
-        const client = getOpenAIClient();
+        const ai = getGeminiClient();
 
-        if (!client) {
+        if (!ai) {
             return res.status(503).json({
                 success: false,
                 message:
@@ -40,51 +71,38 @@ const chatWithAI = async (req, res) => {
         }
 
         const response =
-            await client.responses.create({
-                model: "gpt-5-mini",
+            await ai.models.generateContent({
+                model: "gemini-3.5-flash",
 
-                instructions: `
-You are the AI Repair Assistant for Deepak Repairing Center.
+                contents: `
+${SYSTEM_INSTRUCTIONS}
 
-Your job is to help customers with power tools
-and machine repair queries.
+Customer message:
 
-IMPORTANT:
-
-- Reply in the same language/style the customer uses.
-- Understand Hindi, Hinglish, WhatsApp-style language and English.
-- Keep replies friendly, simple and concise.
-- Do not give dangerous repair instructions.
-- Do not claim to give a final technical diagnosis.
-- If a machine could be unsafe to operate, advise the customer to stop using it and get professional inspection.
-- When useful, suggest one of these services:
-  Machine Repair
-  Spare Parts
-  Maintenance
-  Inspection
-
-Example Hinglish style:
-
-"Samajh gaya 👍 Agar drill start nahi ho rahi hai,
-to motor ya electrical issue ho sakta hai.
-Machine ko abhi use na karein.
-Professional inspection recommended."
-
-You are a customer-support assistant,
-not a replacement for a technician.
+${message.trim()}
 `,
-
-                input: message.trim(),
             });
 
-        const reply = response.output_text;
+        const reply =
+            response.text?.trim();
+
+        if (!reply) {
+            return res.status(500).json({
+                success: false,
+                message:
+                    "AI could not generate a response",
+            });
+        }
 
         return res.status(200).json({
             success: true,
             message: reply,
         });
     } catch (error) {
-        console.error("AI Chat Error:", error);
+        console.error(
+            "Gemini Chat Error:",
+            error
+        );
 
         return res.status(500).json({
             success: false,
@@ -98,15 +116,52 @@ not a replacement for a technician.
 // ADMIN AI REPAIR ANALYSIS
 // =====================================================
 
-const analyzeRepairRequest = async (req, res) => {
+const analyzeRepairRequest = async (
+    req,
+    res
+) => {
     try {
         const {
+            requestId,
             name,
             machine,
             brand,
             service,
             message,
         } = req.body;
+
+        // =================================================
+        // VALIDATE REQUEST ID
+        // =================================================
+
+        if (!requestId) {
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Repair request ID is required",
+            });
+        }
+
+        // =================================================
+        // FIND REQUEST IN MONGODB
+        // =================================================
+
+        const repairRequest =
+            await RepairRequest.findById(
+                requestId
+            );
+
+        if (!repairRequest) {
+            return res.status(404).json({
+                success: false,
+                message:
+                    "Repair request not found",
+            });
+        }
+
+        // =================================================
+        // VALIDATE DETAILS
+        // =================================================
 
         if (!machine && !message) {
             return res.status(400).json({
@@ -116,9 +171,9 @@ const analyzeRepairRequest = async (req, res) => {
             });
         }
 
-        const client = getOpenAIClient();
+        const ai = getGeminiClient();
 
-        if (!client) {
+        if (!ai) {
             return res.status(503).json({
                 success: false,
                 message:
@@ -126,26 +181,40 @@ const analyzeRepairRequest = async (req, res) => {
             });
         }
 
+        // =================================================
+        // REPAIR DETAILS
+        // =================================================
+
         const repairDetails = `
-Customer Name: ${name || "Not provided"}
-Machine: ${machine || "Not provided"}
-Brand: ${brand || "Not provided"}
-Requested Service: ${service || "Not provided"}
-Customer Problem: ${message || "Not provided"}
+Customer Name:
+${name || repairRequest.name || "Not provided"}
+
+Machine:
+${machine || repairRequest.machine || "Not provided"}
+
+Brand:
+${brand || repairRequest.brand || "Not provided"}
+
+Requested Service:
+${service || repairRequest.service || "Not provided"}
+
+Customer Problem:
+${message || repairRequest.message || "Not provided"}
 `;
 
-        const response =
-            await client.responses.create({
-                model: "gpt-5-mini",
+        // =================================================
+        // AI PROMPT
+        // =================================================
 
-                instructions: `
+        const prompt = `
 You are an AI repair-support assistant
 for Deepak Repairing Center.
 
-Analyze the customer's repair request
-and provide useful information to the admin.
+Analyze this customer repair request:
 
-Return ONLY valid JSON in this exact structure:
+${repairDetails}
+
+Return ONLY valid JSON in exactly this structure:
 
 {
   "possibleIssue": "string",
@@ -157,28 +226,61 @@ Return ONLY valid JSON in this exact structure:
 
 IMPORTANT:
 
-- This is only an AI-assisted assessment.
+- This is ONLY an AI-assisted assessment.
 - Never claim a final technical diagnosis.
 - Do not provide dangerous repair instructions.
 - If the machine may be unsafe, clearly recommend stopping use.
 - Keep the assessment practical and concise.
 - Base the analysis only on the information provided.
-`,
+- Do not invent machine details.
+`;
 
-                input: repairDetails,
+        // =================================================
+        // GEMINI REQUEST
+        // =================================================
+
+        const response =
+            await ai.models.generateContent({
+                model: "gemini-3.5-flash",
+
+                contents: prompt,
+
+                config: {
+                    responseMimeType:
+                        "application/json",
+                },
             });
 
         const rawOutput =
-            response.output_text.trim();
+            response.text?.trim();
+
+        if (!rawOutput) {
+            return res.status(500).json({
+                success: false,
+                message:
+                    "AI returned an empty analysis",
+            });
+        }
+
+        // =================================================
+        // PARSE AI RESPONSE
+        // =================================================
 
         let analysis;
 
         try {
-            analysis = JSON.parse(rawOutput);
+            analysis = JSON.parse(
+                rawOutput
+            );
         } catch (parseError) {
             console.error(
-                "AI JSON Parse Error:",
+                "Gemini JSON Parse Error:",
                 parseError
+            );
+
+            console.error(
+                "Raw AI Output:",
+                rawOutput
             );
 
             return res.status(500).json({
@@ -188,13 +290,97 @@ IMPORTANT:
             });
         }
 
+        // =================================================
+        // VALIDATE AI RESPONSE
+        // =================================================
+
+        const allowedPriorities = [
+            "Low",
+            "Medium",
+            "High",
+        ];
+
+        const allowedServices = [
+            "Machine Repair",
+            "Spare Parts",
+            "Maintenance",
+            "Inspection",
+        ];
+
+        if (!analysis.possibleIssue) {
+            analysis.possibleIssue =
+                "Professional inspection recommended";
+        }
+
+        if (
+            !allowedPriorities.includes(
+                analysis.priority
+            )
+        ) {
+            analysis.priority = "Medium";
+        }
+
+        if (
+            !allowedServices.includes(
+                analysis.suggestedService
+            )
+        ) {
+            analysis.suggestedService =
+                "Inspection";
+        }
+
+        if (!analysis.recommendedAction) {
+            analysis.recommendedAction =
+                "Professional technician inspection recommended.";
+        }
+
+        if (!analysis.safetyNote) {
+            analysis.safetyNote =
+                "Do not operate the machine if it appears unsafe.";
+        }
+
+        // =================================================
+        // SAVE AI ANALYSIS TO MONGODB
+        // =================================================
+
+        repairRequest.aiAnalysis = {
+            possibleIssue:
+                analysis.possibleIssue,
+
+            priority:
+                analysis.priority,
+
+            suggestedService:
+                analysis.suggestedService,
+
+            recommendedAction:
+                analysis.recommendedAction,
+
+            safetyNote:
+                analysis.safetyNote,
+
+            analyzedAt: new Date(),
+        };
+
+        await repairRequest.save();
+
+        console.log(
+            `🤖 AI analysis saved for request ${requestId}`
+        );
+
+        // =================================================
+        // SEND RESPONSE
+        // =================================================
+
         return res.status(200).json({
             success: true,
-            data: analysis,
+            message:
+                "AI repair analysis completed and saved",
+            data: repairRequest.aiAnalysis,
         });
     } catch (error) {
         console.error(
-            "AI Repair Analysis Error:",
+            "Gemini Repair Analysis Error:",
             error
         );
 

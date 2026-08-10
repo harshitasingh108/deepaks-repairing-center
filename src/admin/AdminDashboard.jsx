@@ -1,3 +1,6 @@
+
+
+
 import { useEffect, useMemo, useState } from "react";
 
 import {
@@ -90,7 +93,21 @@ const AdminDashboard = () => {
                 );
             }
 
-            setRequests(data.data || []);
+            const fetchedRequests = data.data || [];
+
+            setRequests(fetchedRequests);
+
+            // Load previously saved AI analyses from MongoDB
+            const savedAnalyses = {};
+
+            fetchedRequests.forEach((request) => {
+                if (request.aiAnalysis) {
+                    savedAnalyses[request._id] =
+                        request.aiAnalysis;
+                }
+            });
+
+            setAiAnalysis(savedAnalyses);
         } catch (error) {
             console.error(
                 "Fetch Requests Error:",
@@ -222,6 +239,7 @@ const AdminDashboard = () => {
                         Authorization: `Bearer ${token}`,
                     },
                     body: JSON.stringify({
+                        requestId: request._id,
                         name: request.name,
                         machine:
                             request.machine,

@@ -14,21 +14,28 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-// ================= DATABASE =================
+// =====================================================
+// DATABASE
+// =====================================================
 
 connectDB();
 
-// ================= MIDDLEWARE =================
+// =====================================================
+// MIDDLEWARE
+// =====================================================
 
 app.use(
     cors({
         origin: "http://localhost:5173",
+        credentials: true,
     })
 );
 
 app.use(express.json());
 
-// ================= BASIC ROUTES =================
+// =====================================================
+// BASIC ROUTES
+// =====================================================
 
 app.get("/", (req, res) => {
     res.json({
@@ -45,24 +52,42 @@ app.get("/api/health", (req, res) => {
     });
 });
 
-// ================= API ROUTES =================
+// =====================================================
+// API ROUTES
+// =====================================================
 
-app.use("/api/products", productRoutes);
+app.use(
+    "/api/products",
+    productRoutes
+);
 
-app.use("/api/services", serviceRoutes);
+app.use(
+    "/api/services",
+    serviceRoutes
+);
 
 app.use(
     "/api/repair-requests",
     repairRequestRoutes
 );
 
-app.use("/api/auth", authRoutes);
+app.use(
+    "/api/auth",
+    authRoutes
+);
 
-// 🤖 AI ROUTE
+// =====================================================
+// AI ROUTES
+// =====================================================
 
-app.use("/api/ai", aiRoutes);
+app.use(
+    "/api/ai",
+    aiRoutes
+);
 
-// ================= SERVER =================
+// =====================================================
+// SERVER
+// =====================================================
 
 app.listen(PORT, () => {
     console.log(

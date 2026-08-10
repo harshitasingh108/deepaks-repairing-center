@@ -1,5 +1,55 @@
 const mongoose = require("mongoose");
 
+// =====================================================
+// AI ANALYSIS SCHEMA
+// =====================================================
+
+const aiAnalysisSchema = new mongoose.Schema(
+    {
+        possibleIssue: {
+            type: String,
+            trim: true,
+        },
+
+        priority: {
+            type: String,
+            enum: ["Low", "Medium", "High"],
+        },
+
+        suggestedService: {
+            type: String,
+            enum: [
+                "Machine Repair",
+                "Spare Parts",
+                "Maintenance",
+                "Inspection",
+            ],
+        },
+
+        recommendedAction: {
+            type: String,
+            trim: true,
+        },
+
+        safetyNote: {
+            type: String,
+            trim: true,
+        },
+
+        analyzedAt: {
+            type: Date,
+            default: Date.now,
+        },
+    },
+    {
+        _id: false,
+    }
+);
+
+// =====================================================
+// REPAIR REQUEST SCHEMA
+// =====================================================
+
 const repairRequestSchema = new mongoose.Schema(
     {
         name: {
@@ -20,9 +70,17 @@ const repairRequestSchema = new mongoose.Schema(
             lowercase: true,
         },
 
-        service: {
+        // =================================================
+        // MACHINE DETAILS
+        // =================================================
+
+        machine: {
             type: String,
-            required: true,
+            trim: true,
+        },
+
+        brand: {
+            type: String,
             trim: true,
         },
 
@@ -31,21 +89,50 @@ const repairRequestSchema = new mongoose.Schema(
             trim: true,
         },
 
+        service: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+
         message: {
             type: String,
             trim: true,
         },
 
+        // =================================================
+        // REQUEST STATUS
+        // =================================================
+
         status: {
             type: String,
-            enum: ["pending", "contacted", "in-progress", "completed", "cancelled"],
+            enum: [
+                "pending",
+                "contacted",
+                "in-progress",
+                "completed",
+                "cancelled",
+            ],
             default: "pending",
+        },
+
+        // =================================================
+        // AI REPAIR ANALYSIS
+        // =================================================
+
+        aiAnalysis: {
+            type: aiAnalysisSchema,
+            default: null,
         },
     },
     {
         timestamps: true,
     }
 );
+
+// =====================================================
+// MODEL
+// =====================================================
 
 const RepairRequest = mongoose.model(
     "RepairRequest",
