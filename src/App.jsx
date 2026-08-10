@@ -4,6 +4,7 @@ import { IntlProvider } from "react-intl";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CursorGlow from "./components/CursorGlow";
+import AIChatbot from "./components/AIChatbot";
 import AppRoutes from "./routes/AppRoutes";
 
 import { ThemeProvider } from "./context/ThemeContext";
@@ -23,34 +24,40 @@ const App = () => {
 
   const changeLanguage = (newLanguage) => {
     setLanguage(newLanguage);
-    localStorage.setItem("language", newLanguage);
+    localStorage.setItem(
+      "language",
+      newLanguage
+    );
   };
-
-  const isAdminPage =
-    window.location.pathname.startsWith("/admin");
 
   return (
     <ThemeProvider>
+
       <IntlProvider
         locale={language}
         messages={messages[language]}
         defaultLocale="en"
       >
+
         <CursorGlow />
 
-        {!isAdminPage && (
-          <Navbar
-            language={language}
-            changeLanguage={changeLanguage}
-          />
-        )}
+        <Navbar
+          language={language}
+          changeLanguage={changeLanguage}
+        />
 
         <main>
           <AppRoutes />
         </main>
 
-        {!isAdminPage && <Footer />}
+        <Footer />
+
+        {/* 🤖 Global AI Assistant */}
+
+        <AIChatbot />
+
       </IntlProvider>
+
     </ThemeProvider>
   );
 };
