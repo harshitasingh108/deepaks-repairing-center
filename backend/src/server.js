@@ -8,6 +8,7 @@ const productRoutes = require("./routes/productRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const repairRequestRoutes = require("./routes/repairRequestRoutes");
 const authRoutes = require("./routes/authRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
@@ -32,7 +33,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.json({
         success: true,
-        message: "Deepak Repairing Center API is running 🚀",
+        message:
+            "Deepak Repairing Center API is running 🚀",
     });
 });
 
@@ -49,12 +51,21 @@ app.use("/api/products", productRoutes);
 
 app.use("/api/services", serviceRoutes);
 
-app.use("/api/repair-requests", repairRequestRoutes);
+app.use(
+    "/api/repair-requests",
+    repairRequestRoutes
+);
 
 app.use("/api/auth", authRoutes);
+
+// 🤖 AI ROUTE
+
+app.use("/api/ai", aiRoutes);
 
 // ================= SERVER =================
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(
+        `🚀 Server running on http://localhost:${PORT}`
+    );
 });
