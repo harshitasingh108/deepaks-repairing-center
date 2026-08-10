@@ -34,9 +34,11 @@ const Hero = () => {
           object-center
         "
             >
-                <source src="/cover.mp4" type="video/mp4" />
+                <source
+                    src="https://res.cloudinary.com/wziscl0n/video/upload/v1786389658/cover.mp4"
+                    type="video/mp4"
+                />
             </video>
-
 
             {/* =====================================================
           CINEMATIC OVERLAYS

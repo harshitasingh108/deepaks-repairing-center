@@ -19,7 +19,7 @@ const ContactHero = () => {
                 className="absolute inset-0 h-full w-full object-cover"
             >
                 <source
-                    src="/images/products/blade.mp4"
+                    src="https://res.cloudinary.com/wziscl0n/video/upload/v1786389753/blade.mp4"
                     type="video/mp4"
                 />
 

@@ -27,4 +27,4 @@ dist-ssr
 *.sw?
 
 # Large service videos
-public/images/services/*.mp4
+*.mp4
