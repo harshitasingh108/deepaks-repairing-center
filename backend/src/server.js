@@ -26,7 +26,10 @@ connectDB();
 
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: [
+            "http://localhost:5173",
+            "https://deepaks-repairing-center.vercel.app",
+        ],
         credentials: true,
     })
 );
@@ -40,8 +43,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.json({
         success: true,
-        message:
-            "Deepak Repairing Center API is running 🚀",
+        message: "Deepak Repairing Center API is running 🚀",
     });
 });
 
