@@ -7,7 +7,9 @@ import {
     Wrench,
     Sparkles,
 } from "lucide-react";
-
+const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "http://localhost:5000";
 const AIChatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState("");
@@ -42,7 +44,7 @@ const AIChatbot = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/ai/chat",
+                `${API_URL}/api/ai/chat`,
                 {
                     method: "POST",
                     headers: {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
     Search,
     Phone,
@@ -7,7 +8,9 @@ import {
     Clock3,
     AlertCircle,
 } from "lucide-react";
-
+const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "http://localhost:5000";
 const TrackRepair = () => {
     const [phone, setPhone] = useState("");
     const [request, setRequest] = useState(null);
@@ -28,13 +31,12 @@ const TrackRepair = () => {
             setRequest(null);
 
             const response = await fetch(
-                `http://localhost:5000/api/repair-requests/track?phone=${encodeURIComponent(
+                `${API_URL}/api/repair-requests/track?phone=${encodeURIComponent(
                     phone.trim()
                 )}`
             );
 
             const data = await response.json();
-
             if (!response.ok) {
                 throw new Error(
                     data.message || "Repair request not found"
@@ -200,8 +202,8 @@ const TrackRepair = () => {
 
                                         <div
                                             className={`mx-auto flex h-10 w-10 items-center justify-center rounded-full ${currentStep >= 1
-                                                    ? "bg-orange-500 text-white"
-                                                    : "bg-slate-200 text-slate-400"
+                                                ? "bg-orange-500 text-white"
+                                                : "bg-slate-200 text-slate-400"
                                                 }`}
                                         >
                                             <CheckCircle2 size={20} />
@@ -219,8 +221,8 @@ const TrackRepair = () => {
 
                                         <div
                                             className={`mx-auto flex h-10 w-10 items-center justify-center rounded-full ${currentStep >= 2
-                                                    ? "bg-orange-500 text-white"
-                                                    : "bg-slate-200 text-slate-400"
+                                                ? "bg-orange-500 text-white"
+                                                : "bg-slate-200 text-slate-400"
                                                 }`}
                                         >
                                             <Phone size={18} />
@@ -238,8 +240,8 @@ const TrackRepair = () => {
 
                                         <div
                                             className={`mx-auto flex h-10 w-10 items-center justify-center rounded-full ${currentStep >= 3
-                                                    ? "bg-orange-500 text-white"
-                                                    : "bg-slate-200 text-slate-400"
+                                                ? "bg-orange-500 text-white"
+                                                : "bg-slate-200 text-slate-400"
                                                 }`}
                                         >
                                             <Wrench size={18} />
@@ -257,8 +259,8 @@ const TrackRepair = () => {
 
                                         <div
                                             className={`mx-auto flex h-10 w-10 items-center justify-center rounded-full ${currentStep >= 4
-                                                    ? "bg-green-500 text-white"
-                                                    : "bg-slate-200 text-slate-400"
+                                                ? "bg-green-500 text-white"
+                                                : "bg-slate-200 text-slate-400"
                                                 }`}
                                         >
                                             <CheckCircle2 size={20} />

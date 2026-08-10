@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Lock, Mail, LogIn, ShieldCheck, AlertCircle } from "lucide-react";
+const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "http://localhost:5000";
 
 const AdminLogin = () => {
     const [email, setEmail] = useState("");
@@ -16,7 +19,7 @@ const AdminLogin = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/auth/login",
+                `${API_URL}/api/auth/login`,
                 {
                     method: "POST",
                     headers: {

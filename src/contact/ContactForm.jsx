@@ -12,6 +12,10 @@ import {
     AlertCircle,
 } from "lucide-react";
 
+const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "http://localhost:5000";
+
 const ContactForm = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -45,7 +49,7 @@ const ContactForm = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/repair-requests",
+                `${API_URL}/api/repair-requests`,
                 {
                     method: "POST",
                     headers: {
@@ -55,7 +59,11 @@ const ContactForm = () => {
                         name: formData.name,
                         phone: formData.phone,
                         email: formData.email,
-                        product: `${formData.product} - ${formData.brand}`,
+
+                        // Backend expects "machine"
+                        machine: formData.product,
+
+                        brand: formData.brand,
                         service: formData.service,
                         message: formData.message,
                     }),
@@ -66,7 +74,8 @@ const ContactForm = () => {
 
             if (!response.ok) {
                 throw new Error(
-                    data.message || "Failed to submit request"
+                    data.message ||
+                    "Failed to submit request"
                 );
             }
 
