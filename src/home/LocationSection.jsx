@@ -8,110 +8,331 @@ import {
     MessageCircle,
 } from "lucide-react";
 
+const MAP_URL =
+    "https://www.google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z";
+
 const LocationSection = () => {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-white via-orange-50/40 to-white py-24">
+        <section className="relative overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white py-14 sm:py-20 lg:py-24">
 
-            {/* Background Glow */}
-            <div className="absolute -left-32 top-10 h-80 w-80 rounded-full bg-orange-200/30 blur-[140px]" />
-            <div className="absolute -right-32 bottom-10 h-80 w-80 rounded-full bg-orange-100/40 blur-[140px]" />
+            {/* ================= BACKGROUND GLOW ================= */}
 
-            <div className="relative mx-auto max-w-7xl px-6">
+            <div className="pointer-events-none absolute -left-32 top-10 h-72 w-72 rounded-full bg-orange-200/30 blur-[120px] sm:h-96 sm:w-96" />
 
-                {/* Heading */}
+            <div className="pointer-events-none absolute -right-32 bottom-10 h-72 w-72 rounded-full bg-orange-100/40 blur-[120px] sm:h-96 sm:w-96" />
 
-                <div className="mb-16 text-center">
+            <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
 
-                    <span className="rounded-full bg-orange-100 px-5 py-2 text-sm font-semibold text-orange-600">
+                {/* ================= HEADING ================= */}
+
+                <div className="mb-10 text-center sm:mb-14 lg:mb-16">
+
+                    <span
+                        className="
+              inline-flex
+              rounded-full
+              bg-orange-100
+              px-4 py-2
+              text-xs
+              font-bold
+              text-orange-600
+              sm:px-5
+              sm:text-sm
+            "
+                    >
                         Visit Our Store
                     </span>
 
-                    <h2 className="mt-6 text-5xl font-black text-slate-900">
+                    <h2
+                        className="
+              mt-5
+              text-3xl
+              font-black
+              tracking-tight
+              text-slate-900
+              sm:text-4xl
+              lg:text-5xl
+            "
+                    >
                         Find Us Easily
                     </h2>
 
-                    <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                    <p
+                        className="
+              mx-auto
+              mt-4
+              max-w-2xl
+              text-sm
+              leading-7
+              text-slate-600
+              sm:text-base
+              lg:text-lg
+              lg:leading-8
+            "
+                    >
                         Visit Deepak Repairing Center for genuine power tools,
                         machine repair services and professional support.
                     </p>
 
                 </div>
 
-                <div className="grid items-center gap-10 lg:grid-cols-2">
+                {/* ================= MAIN GRID ================= */}
 
-                    {/* GOOGLE MAP */}
+                <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-10">
 
-                    <div className="overflow-hidden rounded-[35px] border border-white bg-white shadow-[0_25px_60px_rgba(0,0,0,0.12)]">
+                    {/* ================= GOOGLE MAP ================= */}
 
-                        <iframe
-                            title="Deepak Repairing Center"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.1690958223558!2d77.0979262!3d28.744367900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a55c7aae69%3A0x31688d2d0cdef9c9!2sDeepak%20repairing%20center!5e0!3m2!1sen!2sin!4v1786227219812!5m2!1sen!2sin"
-                            className="h-[600px] w-full"
-                            style={{ border: 0 }}
-                            allowFullScreen
-                            loading="lazy"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                        />
+                    <div
+                        className="
+              overflow-hidden
+              rounded-[28px]
+              border
+              border-slate-100
+              bg-white
+              shadow-[0_20px_55px_rgba(15,23,42,0.10)]
+              sm:rounded-[35px]
+            "
+                    >
 
+                        <div className="relative">
+
+                            <iframe
+                                title="Deepak Repairing Center Location"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.1690958223558!2d77.0979262!3d28.744367900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a55c7aae69%3A0x31688d2d0cdef9c9!2sDeepak%20repairing%20center!5e0!3m2!1sen!2sin!4v1786227219812!5m2!1sen!2sin"
+                                className="
+                  h-[300px]
+                  w-full
+                  sm:h-[420px]
+                  lg:h-[600px]
+                "
+                                style={{ border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                            />
+
+                            {/* Open Maps */}
+
+                            <a
+                                href={MAP_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Open Deepak Repairing Center in Google Maps"
+                                className="
+                  absolute
+                  bottom-4
+                  left-1/2
+                  flex
+                  -translate-x-1/2
+                  items-center
+                  gap-2
+                  whitespace-nowrap
+                  rounded-2xl
+                  bg-white
+                  px-4
+                  py-3
+                  text-xs
+                  font-black
+                  text-slate-900
+                  shadow-xl
+                  transition-all
+                  duration-300
+                  hover:-translate-y-0.5
+                  hover:bg-orange-50
+                  sm:bottom-5
+                  sm:px-5
+                  sm:py-3.5
+                  sm:text-sm
+                "
+                            >
+                                <Navigation
+                                    size={17}
+                                    className="text-orange-500"
+                                />
+
+                                Open in Google Maps
+                            </a>
+
+                        </div>
                     </div>
 
-                    {/* CONTACT CARD */}
+                    {/* ================= CONTACT CARD ================= */}
 
-                    <div className="rounded-[35px] border border-white bg-white/90 p-10 shadow-[0_25px_60px_rgba(0,0,0,0.12)] backdrop-blur-xl">
+                    <div
+                        className="
+              rounded-[28px]
+              border
+              border-white
+              bg-white/95
+              p-5
+              shadow-[0_20px_55px_rgba(15,23,42,0.10)]
+              backdrop-blur-xl
+              sm:rounded-[35px]
+              sm:p-8
+              lg:p-10
+            "
+                    >
 
-                        <span className="rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+                        {/* Status */}
+
+                        <span
+                            className="
+                inline-flex
+                rounded-full
+                bg-green-100
+                px-4
+                py-2
+                text-xs
+                font-bold
+                text-green-700
+                sm:text-sm
+              "
+                        >
                             🟢 Open 24 Hours
                         </span>
 
-                        <h2 className="mt-6 text-4xl font-black text-slate-900">
+                        {/* Title */}
+
+                        <h2
+                            className="
+                mt-5
+                text-2xl
+                font-black
+                leading-tight
+                text-slate-900
+                sm:text-3xl
+                lg:text-4xl
+              "
+                        >
                             Deepak Repairing Center
                         </h2>
 
-                        <p className="mt-5 leading-8 text-slate-600">
-                            Trusted destination for Power Tool Sales, Professional
-                            Repair Services and Genuine Spare Parts with more than
-                            45 years of experience.
+                        <p
+                            className="
+                mt-4
+                text-sm
+                leading-7
+                text-slate-600
+                sm:text-base
+                sm:leading-8
+              "
+                        >
+                            Trusted destination for Power Tool Sales, Professional Repair
+                            Services and Genuine Spare Parts with more than 45 years of
+                            experience.
                         </p>
 
-                        {/* Address */}
+                        {/* ================= CONTACT DETAILS ================= */}
 
-                        <div className="mt-10 space-y-7">
+                        <div className="mt-8 space-y-3 sm:mt-10 sm:space-y-4">
 
-                            <div className="flex gap-4">
+                            {/* ADDRESS */}
 
-                                <div className="rounded-2xl bg-orange-100 p-3">
-
-                                    <MapPin className="text-orange-600" />
-
+                            <a
+                                href={MAP_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Open store address in Google Maps"
+                                className="
+                  group
+                  flex
+                  gap-3
+                  rounded-2xl
+                  p-3
+                  transition-all
+                  duration-300
+                  hover:bg-orange-50
+                  active:scale-[0.99]
+                  sm:gap-4
+                  sm:p-3
+                "
+                            >
+                                <div
+                                    className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange-100
+                    transition
+                    group-hover:bg-orange-500
+                    group-hover:text-white
+                    sm:h-12
+                    sm:w-12
+                  "
+                                >
+                                    <MapPin
+                                        className="text-orange-600 group-hover:text-white"
+                                        size={21}
+                                    />
                                 </div>
 
-                                <div>
+                                <div className="min-w-0">
 
                                     <h4 className="font-bold text-slate-900">
                                         Address
                                     </h4>
 
-                                    <p className="mt-2 leading-7 text-slate-600">
-                                        Near Sunhery Chowk,
-                                        A Block,
-                                        Sahibabad Dairy,
-                                        Prahladpur,
-                                        Rohini,
-                                        Delhi - 110042
+                                    <p
+                                        className="
+                      mt-1
+                      text-sm
+                      leading-6
+                      text-slate-600
+                      sm:text-base
+                      sm:leading-7
+                    "
+                                    >
+                                        Near Sunhery Chowk, A Block, Sahibabad Dairy,
+                                        Prahladpur, Rohini, Delhi - 110042
                                     </p>
 
+                                    <span className="mt-1 inline-block text-xs font-bold text-orange-600">
+                                        Tap to open Google Maps →
+                                    </span>
+
                                 </div>
+                            </a>
 
-                            </div>
+                            {/* PHONE */}
 
-                            {/* Phone */}
-
-                            <div className="flex gap-4">
-
-                                <div className="rounded-2xl bg-orange-100 p-3">
-
-                                    <Phone className="text-orange-600" />
-
+                            <a
+                                href="tel:+919871238460"
+                                aria-label="Call Deepak Repairing Center"
+                                className="
+                  group
+                  flex
+                  gap-3
+                  rounded-2xl
+                  p-3
+                  transition-all
+                  duration-300
+                  hover:bg-orange-50
+                  active:scale-[0.99]
+                  sm:gap-4
+                "
+                            >
+                                <div
+                                    className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange-100
+                    sm:h-12
+                    sm:w-12
+                  "
+                                >
+                                    <Phone
+                                        className="text-orange-600"
+                                        size={21}
+                                    />
                                 </div>
 
                                 <div>
@@ -120,52 +341,97 @@ const LocationSection = () => {
                                         Phone
                                     </h4>
 
-                                    <a
-                                        href="tel:+919871238460"
-                                        className="mt-2 block text-slate-600 hover:text-orange-600"
-                                    >
+                                    <p className="mt-1 text-sm text-slate-600 sm:text-base">
                                         +91 98712 38460
-                                    </a>
+                                    </p>
+
+                                    <span className="text-xs font-bold text-orange-600">
+                                        Tap to call →
+                                    </span>
 
                                 </div>
+                            </a>
 
-                            </div>
+                            {/* EMAIL */}
 
-                            {/* Email */}
-
-                            <div className="flex gap-4">
-
-                                <div className="rounded-2xl bg-orange-100 p-3">
-
-                                    <Mail className="text-orange-600" />
-
+                            <a
+                                href="mailto:harshi786108@gmail.com"
+                                aria-label="Email Deepak Repairing Center"
+                                className="
+                  group
+                  flex
+                  gap-3
+                  rounded-2xl
+                  p-3
+                  transition-all
+                  duration-300
+                  hover:bg-orange-50
+                  active:scale-[0.99]
+                  sm:gap-4
+                "
+                            >
+                                <div
+                                    className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange-100
+                    sm:h-12
+                    sm:w-12
+                  "
+                                >
+                                    <Mail
+                                        className="text-orange-600"
+                                        size={21}
+                                    />
                                 </div>
 
-                                <div>
+                                <div className="min-w-0">
 
                                     <h4 className="font-bold text-slate-900">
                                         Email
                                     </h4>
 
-                                    <a
-                                        href="mailto:harshi786108@gmail.com"
-                                        className="mt-2 block text-slate-600 hover:text-orange-600"
-                                    >
+                                    <p className="mt-1 break-all text-sm text-slate-600 sm:text-base">
                                         harshi786108@gmail.com
-                                    </a>
+                                    </p>
 
                                 </div>
+                            </a>
 
-                            </div>
+                            {/* WORKING HOURS */}
 
-                            {/* Timing */}
-
-                            <div className="flex gap-4">
-
-                                <div className="rounded-2xl bg-orange-100 p-3">
-
-                                    <Clock className="text-orange-600" />
-
+                            <div
+                                className="
+                  flex
+                  gap-3
+                  rounded-2xl
+                  p-3
+                  sm:gap-4
+                "
+                            >
+                                <div
+                                    className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange-100
+                    sm:h-12
+                    sm:w-12
+                  "
+                                >
+                                    <Clock
+                                        className="text-orange-600"
+                                        size={21}
+                                    />
                                 </div>
 
                                 <div>
@@ -174,22 +440,42 @@ const LocationSection = () => {
                                         Working Hours
                                     </h4>
 
-                                    <p className="mt-2 font-semibold text-green-600">
+                                    <p className="mt-1 text-sm font-bold text-green-600 sm:text-base">
                                         Open 24 Hours
                                     </p>
 
                                 </div>
-
                             </div>
 
-                            {/* Rating */}
+                            {/* RATING */}
 
-                            <div className="flex gap-4">
-
-                                <div className="rounded-2xl bg-orange-100 p-3">
-
-                                    <Star className="text-orange-600" />
-
+                            <div
+                                className="
+                  flex
+                  gap-3
+                  rounded-2xl
+                  p-3
+                  sm:gap-4
+                "
+                            >
+                                <div
+                                    className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange-100
+                    sm:h-12
+                    sm:w-12
+                  "
+                                >
+                                    <Star
+                                        className="text-orange-600"
+                                        size={21}
+                                    />
                                 </div>
 
                                 <div>
@@ -198,35 +484,84 @@ const LocationSection = () => {
                                         Google Rating
                                     </h4>
 
-                                    <p className="mt-2 text-slate-600">
+                                    <p className="mt-1 text-sm text-slate-600 sm:text-base">
                                         ⭐ 5.0 (5 Reviews)
                                     </p>
 
                                 </div>
-
                             </div>
 
                         </div>
 
-                        {/* Buttons */}
+                        {/* ================= ACTION BUTTONS ================= */}
 
-                        <div className="mt-12 flex flex-wrap gap-4">
+                        <div className="mt-7 grid gap-3 sm:mt-9 sm:flex sm:flex-wrap">
+
+                            {/* DIRECTIONS */}
 
                             <a
-                                href="https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu"
+                                href={MAP_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 rounded-2xl bg-orange-500 px-7 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-orange-600"
+                                aria-label="Get directions to Deepak Repairing Center"
+                                className="
+                  flex
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-2xl
+                  bg-orange-500
+                  px-6
+                  py-4
+                  text-sm
+                  font-black
+                  text-white
+                  shadow-lg
+                  shadow-orange-200
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:bg-orange-600
+                  active:scale-[0.98]
+                  sm:w-auto
+                  sm:px-7
+                "
                             >
                                 <Navigation size={18} />
                                 Get Directions
                             </a>
 
+                            {/* WHATSAPP */}
+
                             <a
                                 href="https://wa.me/919871238460"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 rounded-2xl border border-green-200 bg-green-50 px-7 py-4 font-semibold text-green-700 transition-all duration-300 hover:bg-green-100"
+                                aria-label="Chat with Deepak Repairing Center on WhatsApp"
+                                className="
+                  flex
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-2xl
+                  border
+                  border-green-200
+                  bg-green-50
+                  px-6
+                  py-4
+                  text-sm
+                  font-black
+                  text-green-700
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:bg-green-100
+                  active:scale-[0.98]
+                  sm:w-auto
+                  sm:px-7
+                "
                             >
                                 <MessageCircle size={18} />
                                 WhatsApp
@@ -234,12 +569,42 @@ const LocationSection = () => {
 
                         </div>
 
+                        {/* MOBILE CALL */}
+
+                        <a
+                            href="tel:+919871238460"
+                            aria-label="Call Deepak Repairing Center"
+                            className="
+                mt-3
+                flex
+                w-full
+                items-center
+                justify-center
+                gap-2
+                rounded-2xl
+                border
+                border-orange-200
+                bg-orange-50
+                px-6
+                py-4
+                text-sm
+                font-black
+                text-orange-700
+                transition-all
+                duration-300
+                hover:bg-orange-100
+                active:scale-[0.98]
+                sm:hidden
+              "
+                        >
+                            <Phone size={18} />
+                            Call Now
+                        </a>
+
                     </div>
 
                 </div>
-
             </div>
-
         </section>
     );
 };
