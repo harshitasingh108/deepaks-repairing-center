@@ -15,19 +15,19 @@ const PORT = process.env.PORT || 5000;
 // =====================================================
 // DATABASE
 // =====================================================
-
 connectDB();
 
 // =====================================================
 // MIDDLEWARE
 // =====================================================
-
 app.use(
     cors({
         origin: [
             "http://localhost:5173",
             "https://deepaks-repairing-center.vercel.app",
             "https://deepaks-repairing-center1.harshi786108.workers.dev",
+            "https://deepaksrepairingcenter.com",
+            "https://www.deepaksrepairingcenter.com",
         ],
         credentials: true,
     })
@@ -38,7 +38,6 @@ app.use(express.json());
 // =====================================================
 // BASIC ROUTES
 // =====================================================
-
 app.get("/", (req, res) => {
     res.json({
         success: true,
@@ -56,25 +55,19 @@ app.get("/api/health", (req, res) => {
 // =====================================================
 // API ROUTES
 // =====================================================
-
 app.use("/api/products", productRoutes);
-
 app.use("/api/services", serviceRoutes);
-
 app.use("/api/repair-requests", repairRequestRoutes);
-
 app.use("/api/auth", authRoutes);
 
 // =====================================================
 // AI ROUTES
 // =====================================================
-
 app.use("/api/ai", aiRoutes);
 
 // =====================================================
 // SERVER
 // =====================================================
-
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
