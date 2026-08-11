@@ -19,6 +19,7 @@ const Footer = () => {
         });
     };
 
+    // Exact Deepak Repairing Center Google Maps location
     const MAP_URL =
         "https://www.google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z";
 
@@ -37,8 +38,8 @@ const Footer = () => {
         <footer className="relative overflow-hidden bg-[#070B14] text-white">
 
             {/* =====================================================
-          PREMIUM BACKGROUND
-      ===================================================== */}
+                PREMIUM BACKGROUND
+            ===================================================== */}
 
             <div className="pointer-events-none absolute -left-40 top-10 h-80 w-80 rounded-full bg-orange-500/10 blur-[130px]" />
 
@@ -51,16 +52,16 @@ const Footer = () => {
             <div className="h-px w-full bg-gradient-to-r from-transparent via-orange-500/70 to-transparent" />
 
             {/* =====================================================
-          MAIN FOOTER
-      ===================================================== */}
+                MAIN FOOTER
+            ===================================================== */}
 
             <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
 
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
 
                     {/* =================================================
-              BRAND
-          ================================================= */}
+                        BRAND
+                    ================================================= */}
 
                     <div className="lg:col-span-1">
 
@@ -72,24 +73,24 @@ const Footer = () => {
                         >
                             <div
                                 className="
-                  relative
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  overflow-hidden
-                  rounded-2xl
-                  bg-gradient-to-br
-                  from-orange-400
-                  via-orange-500
-                  to-orange-700
-                  shadow-[0_10px_30px_rgba(249,115,22,0.25)]
-                  transition-all
-                  duration-300
-                  group-hover:-translate-y-1
-                  group-hover:shadow-[0_15px_40px_rgba(249,115,22,0.35)]
-                "
+                                    relative
+                                    flex
+                                    h-12
+                                    w-12
+                                    items-center
+                                    justify-center
+                                    overflow-hidden
+                                    rounded-2xl
+                                    bg-gradient-to-br
+                                    from-orange-400
+                                    via-orange-500
+                                    to-orange-700
+                                    shadow-[0_10px_30px_rgba(249,115,22,0.25)]
+                                    transition-all
+                                    duration-300
+                                    group-hover:-translate-y-1
+                                    group-hover:shadow-[0_15px_40px_rgba(249,115,22,0.35)]
+                                "
                             >
                                 <Wrench
                                     size={23}
@@ -116,26 +117,26 @@ const Footer = () => {
                         {/* Description */}
 
                         <p className="mt-6 max-w-sm text-sm leading-7 text-slate-400">
-                            Trusted destination for power tool sales, genuine spare
-                            parts and professional repair services.
+                            Trusted destination for power tool sales, genuine
+                            spare parts and professional repair services.
                         </p>
 
                         {/* Availability */}
 
                         <div
                             className="
-                mt-7
-                inline-flex
-                items-center
-                gap-3
-                rounded-2xl
-                border
-                border-white/10
-                bg-white/[0.035]
-                px-4
-                py-3
-                backdrop-blur-xl
-              "
+                                mt-7
+                                inline-flex
+                                items-center
+                                gap-3
+                                rounded-2xl
+                                border
+                                border-white/10
+                                bg-white/[0.035]
+                                px-4
+                                py-3
+                                backdrop-blur-xl
+                            "
                         >
                             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400">
                                 <Clock size={18} />
@@ -155,8 +156,8 @@ const Footer = () => {
                     </div>
 
                     {/* =================================================
-              QUICK LINKS
-          ================================================= */}
+                        QUICK LINKS
+                    ================================================= */}
 
                     <div>
 
@@ -171,34 +172,34 @@ const Footer = () => {
                                     key={name}
                                     href={link}
                                     className="
-                    group
-                    flex
-                    items-center
-                    justify-between
-                    rounded-xl
-                    px-3
-                    py-2.5
-                    text-sm
-                    text-slate-400
-                    transition-all
-                    duration-300
-                    hover:bg-white/[0.04]
-                    hover:text-white
-                  "
+                                        group
+                                        flex
+                                        items-center
+                                        justify-between
+                                        rounded-xl
+                                        px-3
+                                        py-2.5
+                                        text-sm
+                                        text-slate-400
+                                        transition-all
+                                        duration-300
+                                        hover:bg-white/[0.04]
+                                        hover:text-white
+                                    "
                                 >
                                     <span className="flex items-center gap-3">
 
                                         <span
                                             className="
-                        h-1
-                        w-1
-                        rounded-full
-                        bg-orange-500
-                        opacity-0
-                        transition-all
-                        duration-300
-                        group-hover:opacity-100
-                      "
+                                                h-1
+                                                w-1
+                                                rounded-full
+                                                bg-orange-500
+                                                opacity-0
+                                                transition-all
+                                                duration-300
+                                                group-hover:opacity-100
+                                            "
                                         />
 
                                         {name}
@@ -207,13 +208,13 @@ const Footer = () => {
                                     <ArrowUpRight
                                         size={14}
                                         className="
-                      opacity-0
-                      transition-all
-                      duration-300
-                      group-hover:translate-x-0.5
-                      group-hover:-translate-y-0.5
-                      group-hover:opacity-70
-                    "
+                                            opacity-0
+                                            transition-all
+                                            duration-300
+                                            group-hover:translate-x-0.5
+                                            group-hover:-translate-y-0.5
+                                            group-hover:opacity-70
+                                        "
                                     />
                                 </a>
                             ))}
@@ -222,8 +223,8 @@ const Footer = () => {
                     </div>
 
                     {/* =================================================
-              CONTACT
-          ================================================= */}
+                        CONTACT
+                    ================================================= */}
 
                     <div>
 
@@ -237,19 +238,20 @@ const Footer = () => {
 
                             <a
                                 href={`tel:${PHONE}`}
+                                aria-label="Call Deepak Repairing Center"
                                 className="
-                  group
-                  flex
-                  gap-3
-                  rounded-2xl
-                  border
-                  border-transparent
-                  p-3
-                  transition-all
-                  duration-300
-                  hover:border-white/10
-                  hover:bg-white/[0.035]
-                "
+                                    group
+                                    flex
+                                    gap-3
+                                    rounded-2xl
+                                    border
+                                    border-transparent
+                                    p-3
+                                    transition-all
+                                    duration-300
+                                    hover:border-white/10
+                                    hover:bg-white/[0.035]
+                                "
                             >
                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white">
                                     <Phone size={18} />
@@ -270,19 +272,20 @@ const Footer = () => {
 
                             <a
                                 href={`mailto:${EMAIL}`}
+                                aria-label="Email Deepak Repairing Center"
                                 className="
-                  group
-                  flex
-                  gap-3
-                  rounded-2xl
-                  border
-                  border-transparent
-                  p-3
-                  transition-all
-                  duration-300
-                  hover:border-white/10
-                  hover:bg-white/[0.035]
-                "
+                                    group
+                                    flex
+                                    gap-3
+                                    rounded-2xl
+                                    border
+                                    border-transparent
+                                    p-3
+                                    transition-all
+                                    duration-300
+                                    hover:border-white/10
+                                    hover:bg-white/[0.035]
+                                "
                             >
                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white">
                                     <Mail size={18} />
@@ -299,25 +302,26 @@ const Footer = () => {
                                 </div>
                             </a>
 
-                            {/* Location */}
+                            {/* Exact Shop Location */}
 
                             <a
                                 href={MAP_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="Open Deepak Repairing Center in Google Maps"
                                 className="
-                  group
-                  flex
-                  gap-3
-                  rounded-2xl
-                  border
-                  border-transparent
-                  p-3
-                  transition-all
-                  duration-300
-                  hover:border-white/10
-                  hover:bg-white/[0.035]
-                "
+                                    group
+                                    flex
+                                    gap-3
+                                    rounded-2xl
+                                    border
+                                    border-transparent
+                                    p-3
+                                    transition-all
+                                    duration-300
+                                    hover:border-orange-500/20
+                                    hover:bg-orange-500/[0.04]
+                                "
                             >
                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white">
                                     <MapPin size={18} />
@@ -335,6 +339,11 @@ const Footer = () => {
                                         <br />
                                         Delhi - 110042
                                     </p>
+
+                                    <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold text-orange-400">
+                                        Open in Google Maps
+                                        <ArrowUpRight size={12} />
+                                    </span>
                                 </div>
                             </a>
 
@@ -342,8 +351,8 @@ const Footer = () => {
                     </div>
 
                     {/* =================================================
-              DEVELOPER
-          ================================================= */}
+                        DEVELOPER
+                    ================================================= */}
 
                     <div>
 
@@ -353,22 +362,22 @@ const Footer = () => {
 
                         <div
                             className="
-                mt-6
-                rounded-[28px]
-                border
-                border-white/10
-                bg-gradient-to-br
-                from-white/[0.07]
-                to-white/[0.025]
-                p-5
-                backdrop-blur-xl
-                transition-all
-                duration-500
-                hover:-translate-y-1
-                hover:border-orange-500/20
-                hover:shadow-[0_20px_50px_rgba(249,115,22,0.08)]
-                sm:p-6
-              "
+                                mt-6
+                                rounded-[28px]
+                                border
+                                border-white/10
+                                bg-gradient-to-br
+                                from-white/[0.07]
+                                to-white/[0.025]
+                                p-5
+                                backdrop-blur-xl
+                                transition-all
+                                duration-500
+                                hover:-translate-y-1
+                                hover:border-orange-500/20
+                                hover:shadow-[0_20px_50px_rgba(249,115,22,0.08)]
+                                sm:p-6
+                            "
                         >
 
                             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400">
@@ -396,22 +405,22 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="
-                    rounded-xl
-                    border
-                    border-white/10
-                    bg-white/[0.04]
-                    px-3
-                    py-2.5
-                    text-center
-                    text-xs
-                    font-semibold
-                    text-slate-300
-                    transition-all
-                    duration-300
-                    hover:border-orange-500/30
-                    hover:bg-orange-500
-                    hover:text-white
-                  "
+                                        rounded-xl
+                                        border
+                                        border-white/10
+                                        bg-white/[0.04]
+                                        px-3
+                                        py-2.5
+                                        text-center
+                                        text-xs
+                                        font-semibold
+                                        text-slate-300
+                                        transition-all
+                                        duration-300
+                                        hover:border-orange-500/30
+                                        hover:bg-orange-500
+                                        hover:text-white
+                                    "
                                 >
                                     GitHub
                                 </a>
@@ -421,22 +430,22 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="
-                    rounded-xl
-                    border
-                    border-white/10
-                    bg-white/[0.04]
-                    px-3
-                    py-2.5
-                    text-center
-                    text-xs
-                    font-semibold
-                    text-slate-300
-                    transition-all
-                    duration-300
-                    hover:border-orange-500/30
-                    hover:bg-orange-500
-                    hover:text-white
-                  "
+                                        rounded-xl
+                                        border
+                                        border-white/10
+                                        bg-white/[0.04]
+                                        px-3
+                                        py-2.5
+                                        text-center
+                                        text-xs
+                                        font-semibold
+                                        text-slate-300
+                                        transition-all
+                                        duration-300
+                                        hover:border-orange-500/30
+                                        hover:bg-orange-500
+                                        hover:text-white
+                                    "
                                 >
                                     LinkedIn
                                 </a>
@@ -444,45 +453,45 @@ const Footer = () => {
                                 <a
                                     href={`mailto:${EMAIL}`}
                                     className="
-                    rounded-xl
-                    border
-                    border-white/10
-                    bg-white/[0.04]
-                    px-3
-                    py-2.5
-                    text-center
-                    text-xs
-                    font-semibold
-                    text-slate-300
-                    transition-all
-                    duration-300
-                    hover:border-orange-500/30
-                    hover:bg-orange-500
-                    hover:text-white
-                  "
+                                        rounded-xl
+                                        border
+                                        border-white/10
+                                        bg-white/[0.04]
+                                        px-3
+                                        py-2.5
+                                        text-center
+                                        text-xs
+                                        font-semibold
+                                        text-slate-300
+                                        transition-all
+                                        duration-300
+                                        hover:border-orange-500/30
+                                        hover:bg-orange-500
+                                        hover:text-white
+                                    "
                                 >
                                     Email
                                 </a>
 
                                 <a
-                                    href="tel:+918287200132"
+                                    href={`tel:${PHONE}`}
                                     className="
-                    rounded-xl
-                    border
-                    border-white/10
-                    bg-white/[0.04]
-                    px-3
-                    py-2.5
-                    text-center
-                    text-xs
-                    font-semibold
-                    text-slate-300
-                    transition-all
-                    duration-300
-                    hover:border-orange-500/30
-                    hover:bg-orange-500
-                    hover:text-white
-                  "
+                                        rounded-xl
+                                        border
+                                        border-white/10
+                                        bg-white/[0.04]
+                                        px-3
+                                        py-2.5
+                                        text-center
+                                        text-xs
+                                        font-semibold
+                                        text-slate-300
+                                        transition-all
+                                        duration-300
+                                        hover:border-orange-500/30
+                                        hover:bg-orange-500
+                                        hover:text-white
+                                    "
                                 >
                                     Call
                                 </a>
@@ -495,25 +504,25 @@ const Footer = () => {
                 </div>
 
                 {/* =====================================================
-            DEVELOPER STRIP
-        ===================================================== */}
+                    DEVELOPER STRIP
+                ===================================================== */}
 
                 <div
                     className="
-            mt-12
-            rounded-[24px]
-            border
-            border-white/10
-            bg-gradient-to-r
-            from-white/[0.05]
-            via-white/[0.025]
-            to-transparent
-            px-4
-            py-5
-            sm:mt-14
-            sm:rounded-3xl
-            sm:px-7
-          "
+                        mt-12
+                        rounded-[24px]
+                        border
+                        border-white/10
+                        bg-gradient-to-r
+                        from-white/[0.05]
+                        via-white/[0.025]
+                        to-transparent
+                        px-4
+                        py-5
+                        sm:mt-14
+                        sm:rounded-3xl
+                        sm:px-7
+                    "
                 >
 
                     <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
@@ -534,24 +543,24 @@ const Footer = () => {
                         <a
                             href={`mailto:${EMAIL}`}
                             className="
-                inline-flex
-                items-center
-                gap-2
-                rounded-xl
-                border
-                border-orange-500/20
-                bg-orange-500/10
-                px-4
-                py-2.5
-                text-xs
-                font-bold
-                text-orange-400
-                transition-all
-                duration-300
-                hover:-translate-y-0.5
-                hover:bg-orange-500
-                hover:text-white
-              "
+                                inline-flex
+                                items-center
+                                gap-2
+                                rounded-xl
+                                border
+                                border-orange-500/20
+                                bg-orange-500/10
+                                px-4
+                                py-2.5
+                                text-xs
+                                font-bold
+                                text-orange-400
+                                transition-all
+                                duration-300
+                                hover:-translate-y-0.5
+                                hover:bg-orange-500
+                                hover:text-white
+                            "
                         >
                             Get In Touch
                             <ExternalLink size={14} />
@@ -561,24 +570,24 @@ const Footer = () => {
                 </div>
 
                 {/* =====================================================
-            BOTTOM
-        ===================================================== */}
+                    BOTTOM
+                ===================================================== */}
 
                 <div
                     className="
-            mt-8
-            flex
-            flex-col
-            items-center
-            gap-5
-            border-t
-            border-white/10
-            pt-6
-            text-center
-            sm:flex-row
-            sm:justify-between
-            sm:text-left
-          "
+                        mt-8
+                        flex
+                        flex-col
+                        items-center
+                        gap-5
+                        border-t
+                        border-white/10
+                        pt-6
+                        text-center
+                        sm:flex-row
+                        sm:justify-between
+                        sm:text-left
+                    "
                 >
 
                     <p className="text-xs text-slate-500 sm:text-sm">
@@ -602,22 +611,22 @@ const Footer = () => {
                         onClick={scrollTop}
                         aria-label="Back to top"
                         className="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-full
-              border
-              border-white/10
-              bg-white/5
-              text-orange-400
-              transition-all
-              duration-300
-              hover:-translate-y-1
-              hover:bg-orange-500
-              hover:text-white
-            "
+                            flex
+                            h-10
+                            w-10
+                            items-center
+                            justify-center
+                            rounded-full
+                            border
+                            border-white/10
+                            bg-white/5
+                            text-orange-400
+                            transition-all
+                            duration-300
+                            hover:-translate-y-1
+                            hover:bg-orange-500
+                            hover:text-white
+                        "
                     >
                         <ArrowUp size={17} />
                     </button>
