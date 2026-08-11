@@ -3,7 +3,6 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
-
 const productRoutes = require("./routes/productRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const repairRequestRoutes = require("./routes/repairRequestRoutes");
@@ -11,7 +10,6 @@ const authRoutes = require("./routes/authRoutes");
 const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
-
 const PORT = process.env.PORT || 5000;
 
 // =====================================================
@@ -29,6 +27,7 @@ app.use(
         origin: [
             "http://localhost:5173",
             "https://deepaks-repairing-center.vercel.app",
+            "https://deepaks-repairing-center1.harshi786108.workers.dev",
         ],
         credentials: true,
     })
@@ -58,41 +57,24 @@ app.get("/api/health", (req, res) => {
 // API ROUTES
 // =====================================================
 
-app.use(
-    "/api/products",
-    productRoutes
-);
+app.use("/api/products", productRoutes);
 
-app.use(
-    "/api/services",
-    serviceRoutes
-);
+app.use("/api/services", serviceRoutes);
 
-app.use(
-    "/api/repair-requests",
-    repairRequestRoutes
-);
+app.use("/api/repair-requests", repairRequestRoutes);
 
-app.use(
-    "/api/auth",
-    authRoutes
-);
+app.use("/api/auth", authRoutes);
 
 // =====================================================
 // AI ROUTES
 // =====================================================
 
-app.use(
-    "/api/ai",
-    aiRoutes
-);
+app.use("/api/ai", aiRoutes);
 
 // =====================================================
 // SERVER
 // =====================================================
 
 app.listen(PORT, () => {
-    console.log(
-        `🚀 Server running on http://localhost:${PORT}`
-    );
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
