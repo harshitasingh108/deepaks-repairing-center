@@ -13,7 +13,7 @@ import {
 import { NavLink } from "react-router-dom";
 
 const MAP_URL =
-    "https://www.google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z";
+    "https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu";
 
 const Hero = () => {
     return (

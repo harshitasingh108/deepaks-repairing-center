@@ -6,15 +6,22 @@ import {
     Star,
     Navigation,
     MessageCircle,
+    ExternalLink,
 } from "lucide-react";
 
-// Exact Deepak Repairing Center Google Maps location
-const MAP_URL =
-    "https://www.google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z";
+// =====================================================
+// DEEPAK REPAIRING CENTER - EXACT GOOGLE MAPS LISTING
+// =====================================================
 
-// Fresh Google Maps Embed URL provided by you
+const MAP_URL =
+    "https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu";
+
+// =====================================================
+// GOOGLE MAPS EMBED
+// =====================================================
+
 const MAP_EMBED_URL =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.1690958223558!2d77.0979262!3d28.744367900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a55c7aae69%3A0x31688d2d0cdef9c9!2sDeepak%20repairing%20center!5e0!3m2!1sen!2sin!4v1786481403582!5m2!1sen!2sin";
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.1690958223558!2d77.0979262!3d28.744367900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a55c7aae69%3A0x31688d2d0cdef9c9!2sDeepak%20repairing%20center!5e0!3m2!1sen!2sin!4v1786227219812!5m2!1sen!2sin";
 
 const LocationSection = () => {
     return (
@@ -37,7 +44,8 @@ const LocationSection = () => {
                             inline-flex
                             rounded-full
                             bg-orange-100
-                            px-4 py-2
+                            px-4
+                            py-2
                             text-xs
                             font-bold
                             text-orange-600
@@ -116,13 +124,13 @@ const LocationSection = () => {
                                 referrerPolicy="strict-origin-when-cross-origin"
                             />
 
-                            {/* Open Maps */}
+                            {/* ================= OPEN EXACT GOOGLE LISTING ================= */}
 
                             <a
                                 href={MAP_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Open Deepak Repairing Center in Google Maps"
+                                aria-label="Open Deepak Repairing Center on Google Maps"
                                 className="
                                     absolute
                                     bottom-4
@@ -142,7 +150,7 @@ const LocationSection = () => {
                                     shadow-xl
                                     transition-all
                                     duration-300
-                                    hover:-translate-y-0.5
+                                    hover:-translate-y-1
                                     hover:bg-orange-50
                                     sm:bottom-5
                                     sm:px-5
@@ -156,6 +164,8 @@ const LocationSection = () => {
                                 />
 
                                 Open in Google Maps
+
+                                <ExternalLink size={14} />
                             </a>
 
                         </div>
@@ -178,7 +188,7 @@ const LocationSection = () => {
                         "
                     >
 
-                        {/* Status */}
+                        {/* STATUS */}
 
                         <span
                             className="
@@ -196,7 +206,7 @@ const LocationSection = () => {
                             🟢 Open 24 Hours
                         </span>
 
-                        {/* Title */}
+                        {/* TITLE */}
 
                         <h2
                             className="
@@ -231,13 +241,13 @@ const LocationSection = () => {
 
                         <div className="mt-8 space-y-3 sm:mt-10 sm:space-y-4">
 
-                            {/* ADDRESS */}
+                            {/* ================= LOCATION ================= */}
 
                             <a
                                 href={MAP_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Open store address in Google Maps"
+                                aria-label="Open Deepak Repairing Center location in Google Maps"
                                 className="
                                     group
                                     flex
@@ -251,6 +261,7 @@ const LocationSection = () => {
                                     sm:gap-4
                                 "
                             >
+
                                 <div
                                     className="
                                         flex
@@ -263,7 +274,6 @@ const LocationSection = () => {
                                         bg-orange-100
                                         transition
                                         group-hover:bg-orange-500
-                                        group-hover:text-white
                                         sm:h-12
                                         sm:w-12
                                     "
@@ -277,7 +287,7 @@ const LocationSection = () => {
                                 <div className="min-w-0">
 
                                     <h4 className="font-bold text-slate-900">
-                                        Address
+                                        Location
                                     </h4>
 
                                     <p
@@ -295,14 +305,26 @@ const LocationSection = () => {
                                         Rohini, Delhi - 110042
                                     </p>
 
-                                    <span className="mt-1 inline-block text-xs font-bold text-orange-600">
-                                        Tap to open Google Maps →
+                                    <span
+                                        className="
+                                            mt-1
+                                            inline-flex
+                                            items-center
+                                            gap-1
+                                            text-xs
+                                            font-bold
+                                            text-orange-600
+                                        "
+                                    >
+                                        Open exact shop in Google Maps
+                                        <ExternalLink size={12} />
                                     </span>
 
                                 </div>
+
                             </a>
 
-                            {/* PHONE */}
+                            {/* ================= PHONE ================= */}
 
                             <a
                                 href="tel:+919871238460"
@@ -320,6 +342,7 @@ const LocationSection = () => {
                                     sm:gap-4
                                 "
                             >
+
                                 <div
                                     className="
                                         flex
@@ -355,9 +378,10 @@ const LocationSection = () => {
                                     </span>
 
                                 </div>
+
                             </a>
 
-                            {/* EMAIL */}
+                            {/* ================= EMAIL ================= */}
 
                             <a
                                 href="mailto:shreyasingh19370@gmail.com"
@@ -375,6 +399,7 @@ const LocationSection = () => {
                                     sm:gap-4
                                 "
                             >
+
                                 <div
                                     className="
                                         flex
@@ -406,9 +431,10 @@ const LocationSection = () => {
                                     </p>
 
                                 </div>
+
                             </a>
 
-                            {/* WORKING HOURS */}
+                            {/* ================= WORKING HOURS ================= */}
 
                             <div
                                 className="
@@ -419,6 +445,7 @@ const LocationSection = () => {
                                     sm:gap-4
                                 "
                             >
+
                                 <div
                                     className="
                                         flex
@@ -450,9 +477,10 @@ const LocationSection = () => {
                                     </p>
 
                                 </div>
+
                             </div>
 
-                            {/* RATING */}
+                            {/* ================= RATING ================= */}
 
                             <div
                                 className="
@@ -463,6 +491,7 @@ const LocationSection = () => {
                                     sm:gap-4
                                 "
                             >
+
                                 <div
                                     className="
                                         flex
@@ -490,10 +519,11 @@ const LocationSection = () => {
                                     </h4>
 
                                     <p className="mt-1 text-sm text-slate-600 sm:text-base">
-                                        ⭐ 5.0 (5 Reviews)
+                                        ⭐ 5.0 (6 Reviews)
                                     </p>
 
                                 </div>
+
                             </div>
 
                         </div>
@@ -502,7 +532,7 @@ const LocationSection = () => {
 
                         <div className="mt-7 grid gap-3 sm:mt-9 sm:flex sm:flex-wrap">
 
-                            {/* DIRECTIONS */}
+                            {/* GET DIRECTIONS - EXACT LISTING */}
 
                             <a
                                 href={MAP_URL}
@@ -574,7 +604,7 @@ const LocationSection = () => {
 
                         </div>
 
-                        {/* MOBILE CALL */}
+                        {/* ================= MOBILE CALL ================= */}
 
                         <a
                             href="tel:+919871238460"
@@ -609,6 +639,7 @@ const LocationSection = () => {
                     </div>
 
                 </div>
+
             </div>
         </section>
     );
