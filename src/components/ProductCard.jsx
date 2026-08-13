@@ -97,6 +97,9 @@ const ProductCard = ({ product }) => {
                     src={product.image}
                     alt={product.name}
                     loading="lazy"
+                    onError={(e) => {
+                        e.currentTarget.src = "/images/products/machine-tools.png";
+                    }}
                     className="
             relative
             h-56

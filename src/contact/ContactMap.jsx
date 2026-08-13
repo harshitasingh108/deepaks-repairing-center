@@ -7,6 +7,7 @@ import {
     Navigation,
     MessageCircle,
 } from "lucide-react";
+import { MAP_URL, MAP_EMBED_URL, openGoogleMaps } from "../constants/map";
 
 const ContactMap = () => {
     return (
@@ -34,7 +35,7 @@ const ContactMap = () => {
 
                         <iframe
                             title="Deepak Repairing Center"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.1690958223558!2d77.0979262!3d28.744367900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a55c7aae69%3A0x31688d2d0cdef9c9!2sDeepak%20repairing%20center!5e0!3m2!1sen!2sin!4v1786227219812!5m2!1sen!2sin"
+                            src={MAP_EMBED_URL}
                             className="h-full w-full"
                             style={{ border: 0 }}
                             allowFullScreen
@@ -219,9 +220,10 @@ const ContactMap = () => {
                         <div className="mt-10 flex flex-wrap gap-4">
 
                             <a
-                                href="https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu"
+                                href={MAP_URL}
+                                onClick={openGoogleMaps}
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noopener noreferrer"
                                 className="
                 flex
                 items-center

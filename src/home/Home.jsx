@@ -1,8 +1,6 @@
 import Hero from "./Hero";
 import FeaturedProducts from "./FeaturedProducts";
 import CTASection from "./CTASection";
-import LocationSection from "./LocationSection";
-
 
 const Home = () => {
     return (
@@ -12,10 +10,6 @@ const Home = () => {
             <FeaturedProducts />
 
             <CTASection />
-
-            <LocationSection />
-
-
         </>
     );
 };

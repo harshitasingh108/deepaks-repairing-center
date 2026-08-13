@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import { useTheme } from "../context/ThemeContext";
+import { MAP_URL, openGoogleMaps } from "../constants/map";
 
 const Navbar = ({ language, changeLanguage }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -50,9 +51,6 @@ const Navbar = ({ language, changeLanguage }) => {
             path: "/contact",
         },
     ];
-
-    const MAP_URL =
-        "https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu";
 
     const selectLanguage = (newLanguage) => {
         changeLanguage(newLanguage);
@@ -743,34 +741,7 @@ const Navbar = ({ language, changeLanguage }) => {
                             </button>
                         </div>
 
-                        {/* Location */}
 
-                        <a
-                            href={MAP_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={closeMobileMenu}
-                            className="
-                mt-2
-                flex
-                items-center
-                justify-center
-                gap-2
-                rounded-2xl
-                border
-                border-orange-200
-                bg-orange-50
-                py-3.5
-                text-sm
-                font-bold
-                text-orange-700
-                transition
-                hover:bg-orange-100
-              "
-                        >
-                            <MapPin size={17} />
-                            Find Us on Google Maps
-                        </a>
 
                         {/* Call */}
 

@@ -11,9 +11,7 @@ import {
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
-
-const MAP_URL =
-    "https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu";
+import { MAP_URL, openGoogleMaps } from "../constants/map";
 
 const Hero = () => {
     return (
@@ -229,11 +227,12 @@ const Hero = () => {
 
                             <a
                                 href={MAP_URL}
+                                onClick={openGoogleMaps}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Open Deepak Repairing Center location in Google Maps"
                                 className="
-                  group flex min-w-0 items-center gap-2.5
+                  home-location-hide-mobile group hidden md:flex min-w-0 items-center gap-2.5
                   rounded-2xl border border-white/15
                   bg-white/[0.08]
                   px-3 py-3
@@ -449,23 +448,9 @@ const Hero = () => {
 
                         </div>
 
-                        {/* MOBILE DIRECTIONS */}
 
-                        <a
-                            href={MAP_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="
-                mt-4
-                flex items-center justify-center gap-2
-                text-xs font-bold text-orange-300
-                transition hover:text-orange-200
-                sm:hidden
-              "
-                        >
-                            <Navigation size={14} />
-                            Get Directions to Our Store
-                        </a>
+
+
 
                     </div>
 

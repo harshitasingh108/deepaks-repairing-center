@@ -47,3 +47,17 @@ html.dark body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(249, 115, 22, 0.7);
 }
+
+/* ================= HOME PAGE LOCATION MOBILE HIDE ================= */
+@media (max-width: 767px) {
+  .home-location-hide-mobile {
+    display: none !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+  }
+}

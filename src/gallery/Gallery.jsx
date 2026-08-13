@@ -4,7 +4,10 @@ import {
     Wrench,
     Sparkles,
     MapPin,
+    Navigation,
+    ExternalLink,
 } from "lucide-react";
+import { MAP_EMBED_URL, MAP_URL, openGoogleMaps } from "../constants/map";
 
 const galleryItems = [
     {
@@ -475,6 +478,9 @@ const Gallery = () => {
                                             src={item.image}
                                             alt={item.title}
                                             loading="lazy"
+                                            onError={(e) => {
+                                                e.currentTarget.src = "/images/products/machine-tools.png";
+                                            }}
                                             className="
                         h-full
                         w-full
@@ -605,6 +611,7 @@ const Gallery = () => {
 
                         <div
                             className="
+                relative
                 overflow-hidden
                 rounded-[32px]
                 border
@@ -618,10 +625,10 @@ const Gallery = () => {
               "
                         >
 
-                            <div className="overflow-hidden rounded-[26px] sm:rounded-[32px]">
+                            <div className="relative overflow-hidden rounded-[26px] sm:rounded-[32px]">
 
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.1690958223558!2d77.0979262!3d28.744367900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a55c7aae69%3A0x31688d2d0cdef9c9!2sDeepak%20repairing%20center!5e0!3m2!1sen!2sin!4v1786227219812!5m2!1sen!2sin"
+                                    src={MAP_EMBED_URL}
                                     width="100%"
                                     height="430"
                                     style={{ border: 0 }}
@@ -631,6 +638,49 @@ const Gallery = () => {
                                     title="Deepak Repairing Center Location"
                                     className="h-[300px] w-full sm:h-[380px] lg:h-[430px]"
                                 />
+
+                                <a
+                                    href={MAP_URL}
+                                    onClick={openGoogleMaps}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Deepak Repairing Center on Google Maps"
+                                    className="
+                                        absolute
+                                        bottom-4
+                                        left-1/2
+                                        flex
+                                        -translate-x-1/2
+                                        items-center
+                                        gap-2
+                                        whitespace-nowrap
+                                        rounded-2xl
+                                        bg-white
+                                        px-4
+                                        py-3
+                                        text-xs
+                                        font-black
+                                        text-slate-900
+                                        shadow-xl
+                                        transition-all
+                                        duration-300
+                                        hover:-translate-y-1
+                                        hover:bg-orange-50
+                                        sm:bottom-5
+                                        sm:px-5
+                                        sm:py-3.5
+                                        sm:text-sm
+                                    "
+                                >
+                                    <Navigation
+                                        size={17}
+                                        className="text-orange-500"
+                                    />
+
+                                    Open in Google Maps
+
+                                    <ExternalLink size={14} />
+                                </a>
 
                             </div>
 

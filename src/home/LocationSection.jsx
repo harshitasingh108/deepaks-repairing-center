@@ -9,29 +9,63 @@ import {
     ExternalLink,
 } from "lucide-react";
 
-// =====================================================
-// DEEPAK REPAIRING CENTER - EXACT GOOGLE MAPS LISTING
-// =====================================================
-
-const MAP_URL =
-    "https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu";
-
-// =====================================================
-// GOOGLE MAPS EMBED
-// =====================================================
-
-const MAP_EMBED_URL =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.1690958223558!2d77.0979262!3d28.744367900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a55c7aae69%3A0x31688d2d0cdef9c9!2sDeepak%20repairing%20center!5e0!3m2!1sen!2sin!4v1786227219812!5m2!1sen!2sin";
+import {
+    MAP_URL,
+    MAP_EMBED_URL,
+    openGoogleMaps,
+} from "../constants/map";
 
 const LocationSection = () => {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white py-14 sm:py-20 lg:py-24">
-
+        <section
+            className="
+                home-location-hide-mobile
+                hidden
+                md:block
+                relative
+                overflow-hidden
+                bg-gradient-to-b
+                from-white
+                via-orange-50/30
+                to-white
+                py-14
+                sm:py-20
+                lg:py-24
+            "
+        >
             {/* ================= BACKGROUND GLOW ================= */}
 
-            <div className="pointer-events-none absolute -left-32 top-10 h-72 w-72 rounded-full bg-orange-200/30 blur-[120px] sm:h-96 sm:w-96" />
+            <div
+                className="
+                    pointer-events-none
+                    absolute
+                    -left-32
+                    top-10
+                    h-72
+                    w-72
+                    rounded-full
+                    bg-orange-200/30
+                    blur-[120px]
+                    sm:h-96
+                    sm:w-96
+                "
+            />
 
-            <div className="pointer-events-none absolute -right-32 bottom-10 h-72 w-72 rounded-full bg-orange-100/40 blur-[120px] sm:h-96 sm:w-96" />
+            <div
+                className="
+                    pointer-events-none
+                    absolute
+                    -right-32
+                    bottom-10
+                    h-72
+                    w-72
+                    rounded-full
+                    bg-orange-100/40
+                    blur-[120px]
+                    sm:h-96
+                    sm:w-96
+                "
+            />
 
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
 
@@ -91,7 +125,15 @@ const LocationSection = () => {
 
                 {/* ================= MAIN GRID ================= */}
 
-                <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-10">
+                <div
+                    className="
+                        grid
+                        items-stretch
+                        gap-6
+                        lg:grid-cols-2
+                        lg:gap-10
+                    "
+                >
 
                     {/* ================= GOOGLE MAP ================= */}
 
@@ -128,6 +170,7 @@ const LocationSection = () => {
 
                             <a
                                 href={MAP_URL}
+                                onClick={openGoogleMaps}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Open Deepak Repairing Center on Google Maps"
@@ -188,7 +231,7 @@ const LocationSection = () => {
                         "
                     >
 
-                        {/* STATUS */}
+                        {/* ================= STATUS ================= */}
 
                         <span
                             className="
@@ -206,7 +249,7 @@ const LocationSection = () => {
                             🟢 Open 24 Hours
                         </span>
 
-                        {/* TITLE */}
+                        {/* ================= TITLE ================= */}
 
                         <h2
                             className="
@@ -245,6 +288,7 @@ const LocationSection = () => {
 
                             <a
                                 href={MAP_URL}
+                                onClick={openGoogleMaps}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Open Deepak Repairing Center location in Google Maps"
@@ -369,7 +413,14 @@ const LocationSection = () => {
                                         Phone
                                     </h4>
 
-                                    <p className="mt-1 text-sm text-slate-600 sm:text-base">
+                                    <p
+                                        className="
+                                            mt-1
+                                            text-sm
+                                            text-slate-600
+                                            sm:text-base
+                                        "
+                                    >
                                         +91 98712 38460
                                     </p>
 
@@ -426,7 +477,15 @@ const LocationSection = () => {
                                         Email
                                     </h4>
 
-                                    <p className="mt-1 break-all text-sm text-slate-600 sm:text-base">
+                                    <p
+                                        className="
+                                            mt-1
+                                            break-all
+                                            text-sm
+                                            text-slate-600
+                                            sm:text-base
+                                        "
+                                    >
                                         shreyasingh19370@gmail.com
                                     </p>
 
@@ -472,7 +531,15 @@ const LocationSection = () => {
                                         Working Hours
                                     </h4>
 
-                                    <p className="mt-1 text-sm font-bold text-green-600 sm:text-base">
+                                    <p
+                                        className="
+                                            mt-1
+                                            text-sm
+                                            font-bold
+                                            text-green-600
+                                            sm:text-base
+                                        "
+                                    >
                                         Open 24 Hours
                                     </p>
 
@@ -518,7 +585,14 @@ const LocationSection = () => {
                                         Google Rating
                                     </h4>
 
-                                    <p className="mt-1 text-sm text-slate-600 sm:text-base">
+                                    <p
+                                        className="
+                                            mt-1
+                                            text-sm
+                                            text-slate-600
+                                            sm:text-base
+                                        "
+                                    >
                                         ⭐ 5.0 (6 Reviews)
                                     </p>
 
@@ -530,12 +604,22 @@ const LocationSection = () => {
 
                         {/* ================= ACTION BUTTONS ================= */}
 
-                        <div className="mt-7 grid gap-3 sm:mt-9 sm:flex sm:flex-wrap">
+                        <div
+                            className="
+                                mt-7
+                                grid
+                                gap-3
+                                sm:mt-9
+                                sm:flex
+                                sm:flex-wrap
+                            "
+                        >
 
-                            {/* GET DIRECTIONS - EXACT LISTING */}
+                            {/* GET DIRECTIONS */}
 
                             <a
                                 href={MAP_URL}
+                                onClick={openGoogleMaps}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Get directions to Deepak Repairing Center"

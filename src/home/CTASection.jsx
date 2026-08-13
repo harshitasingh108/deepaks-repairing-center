@@ -1,7 +1,5 @@
 import { Phone, MessageCircle, MapPin } from "lucide-react";
-
-const MAP_URL =
-    "https://google.com/maps/place/Deepak+repairing+center/@28.7443679,77.0979262,17z/data=!3m1!4b1!4m6!3m5!1s0x390d07a55c7aae69:0x31688d2d0cdef9c9!8m2!3d28.7443679!4d77.0979262!16s%2Fg%2F11qb3j13dv?entry=ttu";
+import { MAP_URL, openGoogleMaps } from "../constants/map";
 
 const CTASection = () => {
     return (
@@ -171,11 +169,14 @@ const CTASection = () => {
 
                         <a
                             href={MAP_URL}
+                            onClick={openGoogleMaps}
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Open Deepak Repairing Center in Google Maps"
                             className="
-                flex
+                home-location-hide-mobile
+                hidden
+                md:flex
                 w-full
                 items-center
                 justify-center
