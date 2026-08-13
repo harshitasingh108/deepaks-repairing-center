@@ -10,7 +10,6 @@ import {
     Wrench,
     ArrowUpRight,
 } from "lucide-react";
-import { MAP_URL, openGoogleMaps } from "../constants/map";
 
 const Footer = () => {
     const scrollTop = () => {
@@ -20,7 +19,9 @@ const Footer = () => {
         });
     };
 
-    // Exact Deepak Repairing Center Google Maps location
+    // Exact Google Maps shared URL of Deepak Repairing Center
+    const MAP_URL =
+        "https://maps.app.goo.gl/ooSKFsFQygtn2PJV8?g_st=ac";
 
     const EMAIL = "shreyasingh19370@gmail.com";
     const PHONE = "+919871238460";
@@ -36,9 +37,7 @@ const Footer = () => {
     return (
         <footer className="relative overflow-hidden bg-[#070B14] text-white">
 
-            {/* =====================================================
-                PREMIUM BACKGROUND
-            ===================================================== */}
+            {/* ================= PREMIUM BACKGROUND ================= */}
 
             <div className="pointer-events-none absolute -left-40 top-10 h-80 w-80 rounded-full bg-orange-500/10 blur-[130px]" />
 
@@ -46,25 +45,17 @@ const Footer = () => {
 
             <div className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-orange-500/[0.05] blur-[120px]" />
 
-            {/* Premium top line */}
-
             <div className="h-px w-full bg-gradient-to-r from-transparent via-orange-500/70 to-transparent" />
 
-            {/* =====================================================
-                MAIN FOOTER
-            ===================================================== */}
+            {/* ================= MAIN FOOTER ================= */}
 
             <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
 
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
 
-                    {/* =================================================
-                        BRAND
-                    ================================================= */}
+                    {/* ================= BRAND ================= */}
 
                     <div className="lg:col-span-1">
-
-                        {/* Logo */}
 
                         <a
                             href="/"
@@ -113,8 +104,6 @@ const Footer = () => {
                             </div>
                         </a>
 
-                        {/* Description */}
-
                         <p className="mt-6 max-w-sm text-sm leading-7 text-slate-400">
                             Trusted destination for power tool sales, genuine
                             spare parts and professional repair services.
@@ -151,12 +140,9 @@ const Footer = () => {
                                 </p>
                             </div>
                         </div>
-
                     </div>
 
-                    {/* =================================================
-                        QUICK LINKS
-                    ================================================= */}
+                    {/* ================= QUICK LINKS ================= */}
 
                     <div>
 
@@ -221,9 +207,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* =================================================
-                        CONTACT
-                    ================================================= */}
+                    {/* ================= CONTACT ================= */}
 
                     <div>
 
@@ -301,11 +285,10 @@ const Footer = () => {
                                 </div>
                             </a>
 
-                            {/* Exact Shop Location */}
+                            {/* ================= EXACT SHOP LOCATION ================= */}
 
                             <a
                                 href={MAP_URL}
-                                onClick={openGoogleMaps}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Open Deepak Repairing Center in Google Maps"
@@ -350,9 +333,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* =================================================
-                        DEVELOPER
-                    ================================================= */}
+                    {/* ================= DEVELOPER ================= */}
 
                     <div>
 
@@ -497,15 +478,12 @@ const Footer = () => {
                                 </a>
 
                             </div>
-
                         </div>
                     </div>
 
                 </div>
 
-                {/* =====================================================
-                    DEVELOPER STRIP
-                ===================================================== */}
+                {/* ================= DEVELOPER STRIP ================= */}
 
                 <div
                     className="
@@ -524,7 +502,6 @@ const Footer = () => {
                         sm:px-7
                     "
                 >
-
                     <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
 
                         <div>
@@ -569,9 +546,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* =====================================================
-                    BOTTOM
-                ===================================================== */}
+                {/* ================= BOTTOM ================= */}
 
                 <div
                     className="
@@ -589,7 +564,6 @@ const Footer = () => {
                         sm:text-left
                     "
                 >
-
                     <p className="text-xs text-slate-500 sm:text-sm">
                         © 2026 Deepak Repairing Center. All Rights Reserved.
                     </p>
@@ -630,7 +604,6 @@ const Footer = () => {
                     >
                         <ArrowUp size={17} />
                     </button>
-
                 </div>
 
             </div>
