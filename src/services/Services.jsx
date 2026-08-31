@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const services = [
     {
@@ -90,6 +91,12 @@ const Services = () => {
         dark:text-white
       "
         >
+            <SEO
+                title="Power Tool Repair Services & Genuine Spare Parts | Deepak Repairing Center"
+                description="Professional power tool repair, machine inspection, tool sales, and genuine spare parts in Delhi. Trusted maintenance with quality workmanship."
+                path="/services"
+            />
+
 
             {/* =====================================================
           HERO

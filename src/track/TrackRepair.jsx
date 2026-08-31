@@ -1,11 +1,11 @@
 import { useState } from "react";
+import SEO from "../components/SEO";
 
 import {
     Search,
     Phone,
     Wrench,
     CheckCircle2,
-    Clock3,
     AlertCircle,
 } from "lucide-react";
 const API_URL =
@@ -77,6 +77,12 @@ const TrackRepair = () => {
 
     return (
         <main className="min-h-screen bg-slate-50 px-5 py-16">
+            <SEO
+                title="Track Your Tool Repair Status | Deepak Repairing Center"
+                description="Check the live status of your power tool repair job at Deepak Repairing Center using your phone number."
+                path="/track-repair"
+            />
+
 
             <div className="mx-auto max-w-4xl">
 

@@ -12,6 +12,8 @@ import {
     Wrench,
 } from "lucide-react";
 
+import SEO from "../components/SEO";
+
 const machines = [
     {
         image: "/images/products/air-blower.jpg",
@@ -60,6 +62,12 @@ const About = () => {
                 dark:text-white
             "
         >
+            <SEO
+                title="About Us | Deepak Repairing Center - 45+ Years of Excellence"
+                description="Learn about Deepak Repairing Center in Delhi. Serving customers since 1980 with quality power tool repair, sales, and genuine machine spare parts."
+                path="/about"
+            />
+
 
             {/* =========================================================
                 HERO

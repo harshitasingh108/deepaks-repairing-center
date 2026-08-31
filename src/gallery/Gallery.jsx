@@ -8,6 +8,7 @@ import {
     ExternalLink,
 } from "lucide-react";
 import { MAP_EMBED_URL, MAP_URL, openGoogleMaps } from "../constants/map";
+import SEO from "../components/SEO";
 
 const galleryItems = [
     {
@@ -165,6 +166,12 @@ const galleryItems = [
 const Gallery = () => {
     return (
         <main className="relative min-h-screen overflow-hidden bg-slate-950">
+            <SEO
+                title="Tool Gallery & Machine Collection | Deepak Repairing Center"
+                description="Explore our collection of power tools, angle grinders, drills, demolition hammers, armatures, bearings, and genuine spare parts."
+                path="/gallery"
+            />
+
 
             {/* =====================================================
           FULL PAGE BACKGROUND VIDEO
