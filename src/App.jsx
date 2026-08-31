@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CursorGlow from "./components/CursorGlow";
 import AIChatbot from "./components/AIChatbot";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import AppRoutes from "./routes/AppRoutes";
 
 import { ThemeProvider } from "./context/ThemeContext";
@@ -40,6 +41,8 @@ const App = () => {
       >
 
         <CursorGlow />
+        <AnalyticsTracker />
+
 
         <Navbar
           language={language}
