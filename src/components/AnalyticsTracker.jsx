@@ -13,7 +13,9 @@ const AnalyticsTracker = () => {
 
       // Brief delay ensures route-specific SEO title is updated before sending page_view
       const timer = setTimeout(() => {
-        window.gtag("config", GA_MEASUREMENT_ID, {
+        // Send explicit page_view event to GA4 collection endpoint
+        window.gtag("event", "page_view", {
+          send_to: GA_MEASUREMENT_ID,
           page_path: pagePath,
           page_location: pageLocation,
           page_title: document.title,
