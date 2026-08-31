@@ -11,6 +11,11 @@ const AnalyticsTracker = () => {
       const pagePath = location.pathname + location.search;
       const pageLocation = window.location.href;
 
+      const isDebugMode =
+        location.search.includes("ga_debug=true") ||
+        location.search.includes("debug=true") ||
+        Boolean(import.meta.env.DEV);
+
       // Brief delay ensures route-specific SEO title is updated before sending page_view
       const timer = setTimeout(() => {
         // Send explicit page_view event to GA4 collection endpoint
@@ -19,6 +24,7 @@ const AnalyticsTracker = () => {
           page_path: pagePath,
           page_location: pageLocation,
           page_title: document.title,
+          ...(isDebugMode ? { debug_mode: true } : {}),
         });
       }, 100);
 
