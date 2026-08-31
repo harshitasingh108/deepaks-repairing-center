@@ -93,9 +93,25 @@ const Services = () => {
         >
             <SEO
                 title="Power Tool Repair Services & Genuine Spare Parts | Deepak Repairing Center"
-                description="Professional power tool repair, machine inspection, tool sales, and genuine spare parts in Delhi. Trusted maintenance with quality workmanship."
+                description="Professional repair for drill machines, welding machines, trimmers, angle grinders, armatures, bearings, and power tool sales in Rohini, Delhi."
                 path="/services"
+                breadcrumbs={[
+                    { name: "Home", item: "/" },
+                    { name: "Services", item: "/services" }
+                ]}
+                schema={{
+                    "@type": "Service",
+                    "name": "Power Tool & Machine Repair Services",
+                    "provider": { "@id": "https://deepaksrepairingcenter.com/#organization" },
+                    "serviceType": "Power Tool Repair, Sales & Spare Parts",
+                    "areaServed": {
+                        "@type": "AdministrativeArea",
+                        "name": "Rohini, Delhi"
+                    },
+                    "description": "Comprehensive repair and maintenance for drill machines, welding machines, trimmers, demolition hammers, angle grinders, armatures, bearings, and power tools."
+                }}
             />
+
 
 
             {/* =====================================================
@@ -217,10 +233,7 @@ const Services = () => {
                   dark:text-slate-400
                 "
                             >
-                                From professional repairs and genuine spare parts to
-                                reliable power tools, we provide practical solutions
-                                for workshops, construction work and everyday
-                                requirements.
+                                From professional repairs of drill machines, welding machines, trimmers, and industrial tools to genuine spare parts (armatures, bearings) and new power tool sales, we provide trusted solutions across Rohini and Delhi.
                             </p>
 
                             <div className="mt-6 flex items-center gap-3">

@@ -12,7 +12,12 @@ const Contact = () => {
                 title="Contact Us & Visit Store | Deepak Repairing Center Delhi"
                 description="Visit Deepak Repairing Center near Sunhery Chowk, Sahibabad Dairy, Rohini, Delhi. Call +91 98712 38460 or message us on WhatsApp for tool repairs."
                 path="/contact"
+                breadcrumbs={[
+                    { name: "Home", item: "/" },
+                    { name: "Contact Us", item: "/contact" }
+                ]}
             />
+
             <ContactHero />
             <ContactMap />
             <ContactForm />

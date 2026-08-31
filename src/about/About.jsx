@@ -66,7 +66,12 @@ const About = () => {
                 title="About Us | Deepak Repairing Center - 45+ Years of Excellence"
                 description="Learn about Deepak Repairing Center in Delhi. Serving customers since 1980 with quality power tool repair, sales, and genuine machine spare parts."
                 path="/about"
+                breadcrumbs={[
+                    { name: "Home", item: "/" },
+                    { name: "About Us", item: "/about" }
+                ]}
             />
+
 
 
             {/* =========================================================

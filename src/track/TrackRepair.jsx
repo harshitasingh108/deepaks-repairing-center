@@ -81,6 +81,10 @@ const TrackRepair = () => {
                 title="Track Your Tool Repair Status | Deepak Repairing Center"
                 description="Check the live status of your power tool repair job at Deepak Repairing Center using your phone number."
                 path="/track-repair"
+                breadcrumbs={[
+                    { name: "Home", item: "/" },
+                    { name: "Track Repair", item: "/track-repair" }
+                ]}
             />
 
 
@@ -96,8 +100,9 @@ const TrackRepair = () => {
                     </span>
 
                     <h1 className="mt-6 text-4xl font-black text-slate-900 sm:text-5xl">
-                        Check Your Repair Status
+                        Track Your Tool Repair Status
                     </h1>
+
 
                     <p className="mx-auto mt-4 max-w-2xl text-slate-600">
                         Enter the phone number used while submitting

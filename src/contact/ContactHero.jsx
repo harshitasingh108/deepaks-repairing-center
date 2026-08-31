@@ -99,7 +99,7 @@ const ContactHero = () => {
             md:text-7xl
           "
                 >
-                    Let's Connect
+                    Contact Deepak Repairing Center
                 </h1>
 
                 {/* Description */}

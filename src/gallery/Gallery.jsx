@@ -170,7 +170,12 @@ const Gallery = () => {
                 title="Tool Gallery & Machine Collection | Deepak Repairing Center"
                 description="Explore our collection of power tools, angle grinders, drills, demolition hammers, armatures, bearings, and genuine spare parts."
                 path="/gallery"
+                breadcrumbs={[
+                    { name: "Home", item: "/" },
+                    { name: "Gallery", item: "/gallery" }
+                ]}
             />
+
 
 
             {/* =====================================================

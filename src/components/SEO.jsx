@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const BASE_URL = "https://deepaksrepairingcenter.com";
 
-const SEO = ({ title, description, path = "" }) => {
+const SEO = ({ title, description, path = "", breadcrumbs, schema }) => {
   useEffect(() => {
     // 1. Update Document Title
     if (title) {
@@ -52,7 +52,49 @@ const SEO = ({ title, description, path = "" }) => {
       const twitterTitle = document.querySelector('meta[name="twitter:title"]');
       if (twitterTitle) twitterTitle.content = title;
     }
-  }, [title, description, path]);
+
+    // 5. Manage Dynamic Page-Specific Structured Data Schema
+    let scriptElement = document.getElementById("dynamic-page-schema");
+    const schemasToInject = [];
+
+    if (breadcrumbs && breadcrumbs.length > 0) {
+      schemasToInject.push({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbs.map((b, idx) => ({
+          "@type": "ListItem",
+          "position": idx + 1,
+          "name": b.name,
+          "item": `${BASE_URL}${b.item}`
+        }))
+      });
+    }
+
+    if (schema) {
+      schemasToInject.push(schema);
+    }
+
+    if (schemasToInject.length > 0) {
+      if (!scriptElement) {
+        scriptElement = document.createElement("script");
+        scriptElement.id = "dynamic-page-schema";
+        scriptElement.type = "application/ld+json";
+        document.head.appendChild(scriptElement);
+      }
+      scriptElement.textContent = JSON.stringify(
+        schemasToInject.length === 1 ? schemasToInject[0] : { "@context": "https://schema.org", "@graph": schemasToInject }
+      );
+    } else if (scriptElement) {
+      scriptElement.remove();
+    }
+
+    return () => {
+      const existingScript = document.getElementById("dynamic-page-schema");
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, [title, description, path, breadcrumbs, schema]);
 
   return null;
 };
